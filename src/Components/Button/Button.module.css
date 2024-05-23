@@ -1,0 +1,60 @@
+.navigation {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--deep-blue, #242a37);
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 38px; /* 271.429% */
+  text-decoration-line: underline;
+  display: block;
+  box-sizing: content-box;
+  cursor: pointer;
+}
+
+.authFormBtn {
+  width: 320px;
+  height: 60px;
+  display: block;
+  box-sizing: border-box;
+  color: #fff;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  background: #ff6b08;
+  outline: none;
+  border: none;
+  margin-top: 32px;
+  margin-bottom: 20px;
+}
+
+.Google {
+  width: 150px;
+  height: 40px;
+  flex-shrink: 0;
+  background: #f5f7fa;
+  box-shadow: 0px 2px 2px 0px rgba(9, 30, 63, 0.15);
+  color: #707375;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 38px; /* 237.5% */
+  border: none;
+  /* margin: 0 auto 28px; */
+  cursor: pointer;
+}
+
+/* ============================================================================================= */
+
+@media screen and (max-width: 767px) {
+  .authFormBtn {
+    width: 280px;
+  }
+}

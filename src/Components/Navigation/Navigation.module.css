@@ -1,0 +1,132 @@
+.box {
+  display: flex;
+  position: relative;
+  z-index: 222;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 16px;
+  background: #fff;
+  box-shadow: 0px 2px 3px 0px rgba(9, 30, 63, 0.1);
+}
+
+.boxMobile {
+  justify-content: center;
+}
+
+.logo {
+  color: #242a37;
+  font-family: "Abril Fatface";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.userName {
+  color: var(--deep-blue, #242a37);
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.userNameBox {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.navList {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  align-items: center;
+  gap: 7px;
+}
+
+.navList::after {
+  width: 1px;
+  height: 33px;
+  background: #e0e5eb;
+  content: "";
+  margin-left: 6px;
+  margin-right: 14px;
+}
+
+.icon {
+  fill: #a6abb9;
+}
+
+.item {
+  padding: 7px;
+  border-radius: 50%;
+  background-color: transparent;
+
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
+.active {
+  background-color: #f5f7fa;
+  width: 33px;
+  height: 33px;
+}
+
+.userNameLogo {
+  padding: 7px;
+  border-radius: 50%;
+  background-color: #f5f7fa;
+  width: 33px;
+  height: 33px;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  color: var(--deep-blue, #242a37);
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* =========================================================================================== */
+
+@media screen and (min-width: 768px) and (max-width: 1150px) {
+  .box {
+    padding: 11px 32px;
+  }
+}
+
+/* ============================================================================================ */
+
+@media screen and (max-width: 767px) {
+  .userName {
+    display: none;
+  }
+  .box {
+    padding: 11px 22px;
+  }
+
+  .userNameBox {
+    position: absolute;
+    right: 84px;
+    left: auto;
+    transform: none;
+  }
+
+  .navList::after {
+    margin-right: 61px;
+  }
+}
