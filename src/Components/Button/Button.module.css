@@ -51,10 +51,92 @@
   cursor: pointer;
 }
 
+.modalTextButton,
+.logOutWindowBtn {
+  display: block;
+  box-sizing: border-box;
+  width: 127px;
+  height: 40px;
+  background: #ff6b08;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+  outline: none;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.modalTextButton:hover,
+.logOutWindowBtn:hover {
+  background: transparent;
+  border: 1px solid #000;
+  color: var(--deep-blue, #242a37);
+}
+
+.BookFormBtn {
+  width: 181px;
+  height: 42px;
+  border: 1px solid var(--deep-blue, #242a37);
+  background: #f6f7fb;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: block;
+  box-sizing: border-box;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-left: 48px;
+}
+
+.BookFormBtn:hover {
+  border: none;
+  color: white;
+  background: #ff6b08;
+}
+
+.mobileForm {
+  width: 52px;
+  height: 52px;
+  background-color: #ff6b08;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  z-index: 222;
+  top: 100%;
+  left: 50%;
+  transform: translate(-26px, -50%);
+}
+
+/* ================================================================================================ */
+@media screen and (min-width: 768px) and (max-width: 1150px) {
+  .BookFormBtn {
+    margin: 40px auto 0;
+    order: 1;
+  }
+}
 /* ============================================================================================= */
 
 @media screen and (max-width: 767px) {
   .authFormBtn {
     width: 280px;
+  }
+
+  .BookFormBtn {
+    width: 171px;
+    margin-top: 40px;
+    margin-left: 0;
   }
 }

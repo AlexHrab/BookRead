@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { register, login, refresh, logout, fetchLocation } from "./operations";
+import {
+  register,
+  login,
+  refresh,
+  logout,
+  fetchLocation,
+  greating,
+  addBook,
+} from "./operations";
 
 const initialState = {
   userData: {
@@ -7,12 +15,16 @@ const initialState = {
     email: "",
     id: "",
   },
+  currentlyReading: [],
+  finishedReading: [],
+  goingToRead: [],
   sid: null,
   accessToken: null,
   refreshToken: null,
   isLoggedIn: false,
   isRefreshing: false,
   location: "/",
+  greating: false,
 };
 
 const slice = createSlice({
@@ -30,6 +42,10 @@ const slice = createSlice({
         state.sid = payload.sid;
         state.refreshToken = payload.refreshToken;
         state.isLoggedIn = true;
+        state.greating = true;
+        state.currentlyReading = payload.userData.currentlyReading;
+        state.finishedReading = payload.userData.finishedReading;
+        state.goingToRead = payload.userData.goingToRead;
       })
       .addCase(logout.fulfilled, (state) => {
         state.sid = null;
@@ -42,10 +58,16 @@ const slice = createSlice({
         state.sid = payload.newSid;
         state.accessToken = payload.newAccessToken;
         state.refreshToken = payload.newRefreshToken;
-        state.isLoggedIn = true;
       })
+
       .addCase(fetchLocation.fulfilled, (state, { payload }) => {
         state.location = payload;
+      })
+      .addCase(greating.fulfilled, (state, { payload }) => {
+        state.greating = payload;
+      })
+      .addCase(addBook.fulfilled, (state, { payload }) => {
+        state.goingToRead.push(payload);
       });
   },
 });

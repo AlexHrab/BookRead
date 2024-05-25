@@ -64,3 +64,26 @@ export const fetchLocation = createAsyncThunk(
     }
   }
 );
+
+export const greating = createAsyncThunk(
+  "auth/greating",
+  async (value, thunkAPI) => {
+    try {
+      return value;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(alert(error.message));
+    }
+  }
+);
+
+export const addBook = createAsyncThunk(
+  "auth/add",
+  async (values, thunkAPI) => {
+    try {
+      const data = await baseUrl.post("/book", values);
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(alert(error.message));
+    }
+  }
+);

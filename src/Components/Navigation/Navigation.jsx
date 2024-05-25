@@ -8,21 +8,30 @@ import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../Redux/Auth/selectors";
 import clsx from "clsx";
 import { useMediaQuery } from "react-responsive";
+import { BookModal } from "../Modal/Modal";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export function Navigation() {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const [modalOpen, setModalOpen] = useState(false);
 
   const navItemActive = ({ isActive }) => {
     return clsx(css.item, isActive && css.active);
   };
 
+  function onClose() {
+    setModalOpen(false);
+  }
+
   const boxMobile = clsx(css.box, isMobile && !isLoggedIn && css.boxMobile);
 
   function logOut() {
     dispatch(logout());
+    setModalOpen(false);
   }
 
   return (
@@ -56,10 +65,22 @@ export function Navigation() {
 
             <Button
               type={"button"}
-              onClick={logOut}
+              onClick={() => setModalOpen(true)}
               title={"Logout"}
               className={"navigation"}
             />
+
+            <BookModal isOpen={modalOpen} onClose={onClose}>
+              <p className={css.logOutWindowText}>
+                Do you really want to log out?
+              </p>
+              <Button
+                type={"button"}
+                onClick={logOut}
+                title={"Yes"}
+                className={"logOutWindowBtn"}
+              />
+            </BookModal>
           </div>
         </>
       )}
