@@ -16,21 +16,13 @@ import { BookModal } from "../../Components/Modal/Modal";
 export function Home() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const goingToRead = useSelector(selectGoingToRead);
-
+  const [showContent, setShowContent] = useState(false);
   const userGreating = useSelector(selectGreating);
-
+  // const isMobile = useMediaQuery({ maxWidth: 767 });
   const dispatch = useDispatch();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [showContent, setShowContent] = useState(false);
-
-  function contentList() {
-    setShowContent(true);
-  }
-
-  function contentForm() {
-    setShowContent(false);
-  }
+  console.log(modalIsOpen);
 
   useEffect(() => {
     if (userGreating) {
@@ -43,26 +35,36 @@ export function Home() {
     dispatch(greating(false));
   }
 
+  function content() {
+    setShowContent(true);
+  }
+
+  function contentOff() {
+    setShowContent(false);
+    setModalIsOpen(false);
+    dispatch(greating(false));
+  }
+
   return (
     <div className={css.home}>
-      {isMobile && (
+      {(showContent || userGreating) && isMobile && (
         <svg
+          className={css.iconBack}
           width="24"
           height="12"
-          className={css.iconBack}
-          onClick={contentForm}
+          onClick={contentOff}
         >
           <use href="../../../public/symbol-defs.svg#icon-back"></use>
         </svg>
       )}
-      {(!isMobile || showContent) && <BookForm />}
+      {showContent && <BookForm />}
       {!showContent && !userGreating && (
         <div>
-          <GoingToRead onClick={contentList} />
+          <GoingToRead onClick={content} />
         </div>
       )}
 
-      {userGreating && !showContent && (
+      {userGreating && (
         <BookModal isOpen={modalIsOpen} onClose={close}>
           <ul className={css.list}>
             <li className={css.listItem}>

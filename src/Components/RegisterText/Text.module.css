@@ -55,6 +55,7 @@
 .icon {
   fill: #ff6b08;
   margin-right: 5px;
+  flex-shrink: 0;
 }
 
 .textBlockFirst {

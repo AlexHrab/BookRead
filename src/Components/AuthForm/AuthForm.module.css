@@ -96,4 +96,12 @@ label:not(:last-of-type) {
   .input {
     width: 280px;
   }
+
+  .authFormRegisterText {
+    position: static;
+  }
+
+  .authFormSpan {
+    position: static;
+  }
 }

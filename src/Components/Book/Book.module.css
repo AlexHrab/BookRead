@@ -91,12 +91,11 @@
 
   .yearAndTotal {
     gap: 9px;
-    width: auto;
+    width: 110px;
     display: flex;
-    align-items: start;
+    align-items: flex-start;
 
     flex-direction: column;
-    /* justify-content: space-between; */
   }
 
   .yearAndTotalAndAuthor {
@@ -119,9 +118,9 @@
     text-align: left;
   }
 
-  span {
+  .span {
     position: absolute;
-    left: 48px;
+    left: 42px;
     color: #898f9f;
   }
 }

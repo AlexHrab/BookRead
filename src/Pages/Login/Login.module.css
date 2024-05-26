@@ -144,4 +144,8 @@
   .textAuthor {
     font-size: 14px;
   }
+
+  .textSpan {
+    position: static;
+  }
 }

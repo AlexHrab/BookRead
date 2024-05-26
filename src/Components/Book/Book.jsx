@@ -13,15 +13,15 @@ export function Book({ book }) {
         <p className={css.title}>{book.title}</p>
       </div>
       <div className={css.yearAndTotalAndAuthor}>
-        {isMobile && <span>Author:</span>}
+        {isMobile && <span className={css.span}>Author:</span>}
         <p className={css.author}>{book.author}</p>
 
         <div className={css.yearAndTotal}>
-          {isMobile && <span>Year:</span>}
+          {isMobile && <span className={css.span}>Year:</span>}
           <p className={css.publishYear}>{book.publishYear}</p>
 
           <div className={css.pagesTotalBox}>
-            {isMobile && <span>Pages:</span>}
+            {isMobile && <span className={css.span}>Pages:</span>}
             <p className={css.pagesTotal}>{book.pagesTotal}</p>
           </div>
         </div>

@@ -101,16 +101,6 @@
   line-height: normal;
 }
 
-.logOutWindowText {
-  text-align: center;
-  color: var(--deep-blue, #242a37);
-  font-family: Montserrat;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
 /* =========================================================================================== */
 
 @media screen and (min-width: 768px) and (max-width: 1150px) {

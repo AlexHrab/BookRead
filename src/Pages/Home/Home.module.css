@@ -66,6 +66,7 @@
 }
 
 .iconBack {
+  z-index: 111;
   fill: #ff6b08;
   margin-bottom: 32px;
   text-align: left;

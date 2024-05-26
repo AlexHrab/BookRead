@@ -59,6 +59,27 @@
   margin-right: 8px;
 }
 
+.logOutWindowText {
+  text-align: center;
+  color: var(--deep-blue, #242a37);
+  font-family: Montserrat;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 60px;
+}
+
+.buttonBox {
+  display: flex;
+  justify-content: center;
+}
+
+.modal {
+  position: absolute;
+  z-index: 6;
+}
+
 /* =============================================================================================== */
 
 @media screen and (max-width: 767px) {
@@ -69,5 +90,10 @@
 
   .iconVector {
     flex-shrink: 0;
+  }
+
+  .buttonBox {
+    flex-direction: column;
+    gap: 20px;
   }
 }

@@ -5,8 +5,8 @@ import {
   refresh,
   logout,
   fetchLocation,
-  greating,
   addBook,
+  greating,
 } from "./operations";
 
 const initialState = {
