@@ -14,6 +14,19 @@
   font-weight: 500;
 }
 
+.itemGoingToRead {
+  box-shadow: none;
+  box-sizing: border-box;
+  background: transparent;
+  height: 100%;
+  /* margin-bottom: 22px; */
+  padding: 0 32px 0 0;
+}
+
+.itemGoingToRead:not(:last-of-type) {
+  margin-bottom: 22px;
+}
+
 .yearAndTotal {
   width: 160px;
   display: flex;

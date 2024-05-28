@@ -4,13 +4,20 @@ import { Book } from "../Book/Book";
 import css from "./GoingToRead.module.css";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "../../Components/Button/Button";
+import { selectLocation } from "../../Redux/Auth/selectors";
+import clsx from "clsx";
 
 export function GoingToRead({ onClick }) {
+  // const thisLocation = useSelector(selectLocation);
+  // const location = thisLocation === "/training" ? true : false;
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const GoingToRead = useSelector(selectGoingToRead);
+
+  // const list = clsx(css.listAndButton, location && css.listGoingToRead);
+
   return (
     <div>
-      <h4 className={css.title}>Going to read</h4>
+      {!location && <h4 className={css.title}>Going to read</h4>}
       {!isMobile && (
         <div className={css.titles}>
           <p>Book title</p>

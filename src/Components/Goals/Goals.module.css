@@ -1,0 +1,86 @@
+.goals {
+  width: 288px;
+  height: 304px;
+  background: #fff;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  display: block;
+  box-sizing: border-box;
+  width: 288px;
+  align-items: flex-end;
+  background: #b1b5c2;
+  box-shadow: 0px 2px 3px 0px rgba(9, 30, 63, 0.1);
+  padding: 18px 0;
+  color: #fff;
+  /* text-align: center; */
+  font-family: Montserrat;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.valuesListItem {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.value {
+  height: 66px;
+  background: #f5f7fa;
+  box-shadow: 4px 4px 8px 0px rgba(36, 42, 55, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #091e3f;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 38px; /* 105.556% */
+}
+
+.value_runDate {
+  height: 100px;
+  font-size: 45px;
+}
+
+.valuesList {
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.values {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.description {
+  box-sizing: border-box;
+  display: block;
+  padding: 0 5px;
+  color: #898f9f;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  width: 66px;
+}
+
+.description_runDate {
+  width: 100px;
+  font-size: 14px;
+}

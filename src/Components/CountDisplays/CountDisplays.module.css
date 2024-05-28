@@ -1,0 +1,74 @@
+.timer {
+  display: flex;
+  background: #fff;
+  box-shadow: 4px 4px 8px 0px rgba(36, 42, 55, 0.15);
+  width: 290px;
+  box-sizing: border-box;
+  align-items: center;
+  padding: 0 45px 8px;
+  justify-content: center;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.value {
+  display: flex;
+  align-items: baseline;
+  color: #091e3f;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 38px;
+}
+
+.valueData {
+  align-items: flex-start;
+}
+
+.label {
+  color: #898f9f;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.sign {
+  margin: 0 10px 0;
+  align-self: flex-start;
+  color: #091e3f;
+  font-family: "Open Sans";
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 38px; /* 152% */
+}
+
+.timerBox {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  margin-bottom: 44px;
+}
+
+.title {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: #898f9f;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

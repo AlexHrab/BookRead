@@ -1,0 +1,32 @@
+.Training {
+  padding: 40px 16px;
+}
+
+.calendars {
+  display: flex;
+}
+
+.countsAndGoals {
+  display: flex;
+  justify-content: space-between;
+}
+
+.counts {
+  display: flex;
+  gap: 74px;
+  align-self: flex-start;
+  padding: 0 153px 0;
+}
+
+.calendars {
+  display: flex;
+
+  gap: 44px;
+  margin: 24px 0 24px 170px;
+}
+
+.countsAndTrainingAndCalendars {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}

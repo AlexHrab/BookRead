@@ -21,6 +21,7 @@ import "@fontsource/montserrat/300.css";
 import "@fontsource/montserrat/600.css";
 import "@fontsource/montserrat/500.css";
 import "@fontsource/roboto/700.css";
+import "@fontsource/open-sans/700.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +38,6 @@ function App() {
       return;
     }
   }, [dispatch, link]);
-  console.log(thisLocation);
 
   return (
     <>

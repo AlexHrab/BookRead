@@ -22,7 +22,6 @@ export function Home() {
   const dispatch = useDispatch();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  console.log(modalIsOpen);
 
   useEffect(() => {
     if (userGreating) {
@@ -57,7 +56,7 @@ export function Home() {
           <use href="../../../public/symbol-defs.svg#icon-back"></use>
         </svg>
       )}
-      {showContent && <BookForm />}
+      {(showContent || !isMobile) && <BookForm />}
       {!showContent && !userGreating && (
         <div>
           <GoingToRead onClick={content} />

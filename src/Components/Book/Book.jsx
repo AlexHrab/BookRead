@@ -1,11 +1,18 @@
 import css from "./Book.module.css";
 import { useMediaQuery } from "react-responsive";
+import { selectLocation } from "../../Redux/Auth/selectors";
+import { useSelector } from "react-redux";
+import clsx from "clsx";
 
 export function Book({ book }) {
+  const thisLocation = useSelector(selectLocation);
+  const location = thisLocation === "/training" ? true : false;
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
+  const list = clsx(css.item, location && css.itemGoingToRead);
+
   return (
-    <li className={css.item}>
+    <li className={list}>
       <div className={css.titleAndSvg}>
         <svg className={css.icon} width="22" height="17">
           <use href="../../../public/symbol-defs.svg#icon-Flat"></use>
@@ -25,6 +32,11 @@ export function Book({ book }) {
             <p className={css.pagesTotal}>{book.pagesTotal}</p>
           </div>
         </div>
+        {location && (
+          <svg className={css.iconDelete} width="14" height="18">
+            <use href="../../../public/symbol-defs.svg#icon-delete"></use>
+          </svg>
+        )}
       </div>
     </li>
   );
