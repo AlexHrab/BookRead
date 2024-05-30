@@ -1,0 +1,8 @@
+.spanBox {
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  fill: #a6abb9;
+}

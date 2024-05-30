@@ -4,3 +4,4 @@ export const selectUserName = (state) => state.auth.userData.name;
 export const selectGreating = (state) => state.auth.greating;
 export const selectGoingToRead = (state) => state.auth.goingToRead;
 export const selectCurrentlyReading = (state) => state.auth.currentlyReading;
+export const selectTrainingBookList = (state) => state.auth.trainingBookList;

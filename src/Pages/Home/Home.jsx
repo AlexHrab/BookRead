@@ -59,7 +59,7 @@ export function Home() {
       {(showContent || !isMobile) && <BookForm />}
       {!showContent && !userGreating && (
         <div>
-          <GoingToRead onClick={content} />
+          <GoingToRead onClick={content} value={goingToRead} />
         </div>
       )}
 

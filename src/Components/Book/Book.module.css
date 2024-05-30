@@ -14,18 +14,19 @@
   font-weight: 500;
 }
 
-.itemGoingToRead {
+.itemForTraining {
+  padding: 0 32px 0 0;
   box-shadow: none;
   box-sizing: border-box;
   background: transparent;
   height: 100%;
-  /* margin-bottom: 22px; */
-  padding: 0 32px 0 0;
 }
 
-.itemGoingToRead:not(:last-of-type) {
+.itemForTraining:not(:last-of-type) {
   margin-bottom: 22px;
 }
+
+/* ================================================================================================ */
 
 .yearAndTotal {
   width: 160px;
@@ -35,10 +36,24 @@
   justify-content: space-between;
 }
 
+.yearAndTotalForTraining {
+  width: 132px;
+  gap: 0;
+}
+
+/* ============================================================================================== */
+
 .yearAndTotalAndAuthor {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
+
+.yearAndTotalAndAuthorForTraining {
+  width: 273px;
+}
+
+/* ============================================================================================= */
 
 .author {
   align-items: center;
@@ -46,17 +61,53 @@
   left: 46%;
 }
 
+.authorForTraining {
+  left: 42%;
+  width: 150px;
+  text-align: left;
+}
+
+/* ================================================================================================ */
+
 .titleAndSvg {
   display: flex;
   align-items: center;
   gap: 18px;
 }
 
+.trainingtitleAndSvg {
+  gap: 14px;
+}
+
+/* ================================================================================================ */
+
 .icon {
   fill: #a6abb9;
   flex-shrink: 0;
 }
 
+.iconDelete {
+  fill: #a6abb9;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.titleForTraining {
+  text-align: left;
+  max-width: 280px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: inline-block;
+}
+
+.pagesTotal {
+  width: 25px;
+  text-align: left;
+}
+
+/* ================================================================================================= */
 /* =========================================================================================== */
 
 @media screen and (min-width: 768px) and (max-width: 1150px) {

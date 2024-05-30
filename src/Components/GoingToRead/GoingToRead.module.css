@@ -6,6 +6,17 @@
   margin: 0;
 }
 
+.listforTraining {
+  box-sizing: border-box;
+  display: flex;
+  /* flex-direction: column;
+  justify-content: center; */
+  /* height: 100%; */
+  /* padding: 20px 0 20px; */
+}
+
+/* =================================================================================================== */
+
 .titles {
   display: flex;
   margin-bottom: 8px;
@@ -20,6 +31,16 @@
   font-weight: 500;
 }
 
+.titlesforTraining {
+  border-top: 1px solid #e0e5eb;
+  border-bottom: 1px solid #e0e5eb;
+  /* margin-bottom: 12px; */
+  padding: 12px 161px 12px 0;
+  margin-bottom: 0;
+}
+
+/* ================================================================================================ */
+
 .yearAndTotal {
   width: 160px;
   display: flex;
@@ -28,10 +49,24 @@
   justify-content: space-between;
 }
 
+.yearAndTotalforTraining {
+  width: 150px;
+  gap: 65px;
+}
+
+/* ================================================================================================ */
+
 .author {
   position: absolute;
   left: 46%;
 }
+
+.authorforTraining {
+  left: 42%;
+}
+
+/* ================================================================================================== */
+
 p {
   margin: 0;
 }
@@ -47,25 +82,31 @@ p {
   line-height: normal;
 }
 
+/* =================================================================================================== */
+
 .listAndButton {
   display: block;
   box-sizing: border-box;
   position: relative;
 }
 
+.listAndButtonfotTraining {
+  position: static;
+  max-height: 212px;
+  padding: 22px 0 22px !important;
+  width: 928px !important;
+  overflow: auto;
+  overflow-x: hidden;
+  flex: 1;
+  border-bottom: 1px solid #e0e5eb;
+  margin-bottom: 40px;
+}
+
+/* ================================================================================================== */
+
 .icon {
   stroke: white;
   fill: white;
-}
-
-.listGoingToRead {
-  padding: 40px 0 20px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 928px;
-  height: 212px;
-  overflow: scroll;
 }
 
 /* =========================================================================================== */

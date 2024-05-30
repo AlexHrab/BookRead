@@ -97,6 +97,11 @@
   margin-left: 48px;
 }
 
+.BookFormBtn,
+.select {
+  margin-left: 32px;
+}
+
 .BookFormBtn:hover {
   border: none;
   color: white;

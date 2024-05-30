@@ -15,6 +15,7 @@ const initialState = {
     email: "",
     id: "",
   },
+  trainingBookList: [],
   currentlyReading: [],
   finishedReading: [],
   goingToRead: [],
@@ -70,6 +71,25 @@ const slice = createSlice({
         state.goingToRead.push(payload);
       });
   },
+  reducers: {
+    trainingBookList: (state, { payload }) => {
+      const bookExists = state.trainingBookList.find(
+        (book) => book._id === payload
+      );
+      if (!bookExists || state.trainingBookList.length === 0) {
+        const book = state.goingToRead.find((book) => book._id === payload);
+
+        state.trainingBookList.push(book);
+      }
+    },
+    trainingItemDelete: (state, { payload }) => {
+      state.trainingBookList = state.trainingBookList.filter(
+        (book) => book._id !== payload
+      );
+    },
+  },
 });
 
 export const authReducer = slice.reducer;
+
+export const { trainingBookList, trainingItemDelete } = slice.actions;

@@ -13,9 +13,11 @@
 
 .counts {
   display: flex;
+  /* box-sizing: content-box; */
+  width: 100%;
   gap: 74px;
-  align-self: flex-start;
-  padding: 0 153px 0;
+  /* align-self: flex-start; */
+  padding-left: 137px;
 }
 
 .calendars {

@@ -1,5 +1,4 @@
-/* .GoingToRead {
-  width: 928px;
-  height: 212px;
-  overflow: scroll;
-} */
+.Button {
+  display: flex;
+  justify-content: center;
+}
