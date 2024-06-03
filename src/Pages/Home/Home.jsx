@@ -10,24 +10,32 @@ import { useDispatch } from "react-redux";
 import { greating } from "../../Redux/Auth/operations";
 import { useEffect } from "react";
 // import { useSelector } from "react-redux";
-import { selectGreating } from "../../Redux/Auth/selectors";
+import { selectGreating, selectAccessToken } from "../../Redux/Auth/selectors";
 import { BookModal } from "../../Components/Modal/Modal";
+import { getAllBooks } from "../../Redux/Auth/operations";
 
 export function Home() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const goingToRead = useSelector(selectGoingToRead);
-  const [showContent, setShowContent] = useState(false);
+  const accessToken = useSelector(selectAccessToken);
   const userGreating = useSelector(selectGreating);
   // const isMobile = useMediaQuery({ maxWidth: 767 });
   const dispatch = useDispatch();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     if (userGreating) {
       setModalIsOpen(true);
     }
   }, [userGreating, modalIsOpen]);
+
+  useEffect(() => {
+    if (accessToken) {
+      dispatch(getAllBooks());
+    }
+  }, [dispatch, accessToken]);
 
   function close() {
     setModalIsOpen(false);

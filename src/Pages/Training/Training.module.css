@@ -1,34 +1,169 @@
 .Training {
+  /* box-sizing: border-box; */
   padding: 40px 16px;
+  /* display: flex;
+  flex-direction: column; */
 }
 
-.calendars {
-  display: flex;
-}
-
-.countsAndGoals {
+/* .countsAndTrainingAndCalendarsAndGoals {
   display: flex;
   justify-content: space-between;
-}
+  margin-bottom: 40px;
+  gap: 32px;
+  width: 928px;
+} */
 
 .counts {
   display: flex;
-  /* box-sizing: content-box; */
-  width: 100%;
+  box-sizing: border-box;
+  /* width: 928px; */
   gap: 74px;
   /* align-self: flex-start; */
   padding-left: 137px;
 }
 
-.calendars {
+.countsAndGoals {
   display: flex;
-
-  gap: 44px;
-  margin: 24px 0 24px 170px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  /* gap: 32px; */
+  /* flex-grow: 0; */
+  margin-bottom: 40px;
+  position: relative;
 }
 
-.countsAndTrainingAndCalendars {
+.calendars {
+  display: flex;
+  width: 928px;
+  gap: 44px;
+  margin: 28px 0 28px;
+  padding-left: 170px;
+  box-sizing: border-box;
+}
+
+/* .countsAndTrainingAndCalendars {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+   align-items: center; 
+}  */
+
+.statistics {
+  box-sizing: border-box;
+  width: 288px;
+  height: 340px;
+  display: flex;
+  padding: 20px 24px;
+  background: #fff;
+  box-shadow: 0px 2px 3px 0px rgba(9, 30, 63, 0.1);
+}
+
+.Schedule {
+  /* flex-grow: 0; */
+  display: flex;
+  /* box-sizing: border-box; */
+  flex-shrink: 0;
+  width: 928px;
+  height: 340px;
+  background: #fff;
+  box-shadow: 0px 2px 3px 0px rgba(9, 30, 63, 0.1);
+}
+
+.statisticsAndSchedule {
+  box-sizing: border-box;
+  display: flex;
+  /* gap: 32px; */
+  justify-content: space-between;
+}
+
+.listAndAll {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-grow: 0;
+}
+
+.goalsAndTrainingList {
+  display: flex;
+  box-sizing: border-box;
+  /* width: 100%; */
+  /* justify-content: space-between; */
+}
+
+.trainingAndCalendars {
+  width: 928px;
+}
+
+/* ======================================================================================================= */
+
+@media screen and (min-width: 768px) and (max-width: 1150px) {
+  .Training {
+    padding: 32px;
+  }
+
+  /* .countsAndTrainingAndCalendarsAndGoals {
+    flex-direction: column;
+  } */
+
+  /* .countsAndTrainingAndCalendars {
+   order: 3; 
+  }  */
+
+  .countsAndGoals {
+    flex-direction: column;
+  }
+
+  .Schedule {
+    width: 100%;
+  }
+
+  .statisticsAndSchedule {
+    flex-direction: column;
+  }
+
+  .statistics {
+    width: 100%;
+  }
+
+  .counts {
+    order: 0;
+    width: 100%;
+    gap: 32px;
+    /* align-self: flex-start; */
+    padding: 0;
+    justify-content: center;
+    margin-bottom: 36px;
+  }
+
+  .listAndAll {
+    order: 3;
+  }
+
+  .trainingAndCalendars {
+    order: 6;
+    width: 100%;
+  }
+
+  .goalsAndTrainingList {
+    flex-direction: column;
+  }
+
+  .calendars {
+    width: 100%;
+    padding: 0;
+  }
+
+  .Schedule {
+    margin-bottom: 40px;
+  }
+
+  .statistics {
+    padding: 0;
+    width: 100%;
+  }
+}
+
+/* ================================================================================================ */
+
+@media screen and (max-width: 767px) {
 }

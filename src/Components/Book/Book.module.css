@@ -98,13 +98,17 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
   display: inline-block;
 }
 
 .pagesTotal {
   width: 25px;
   text-align: left;
+}
+
+.checkbox {
+  margin: 0;
 }
 
 /* ================================================================================================= */
@@ -129,6 +133,30 @@
 
   .titleAndSvg {
     gap: 8px;
+  }
+
+  .itemForTraining {
+    padding: 0 70px 0 0;
+    box-shadow: none;
+    box-sizing: border-box;
+    background: transparent;
+    height: 100%;
+  }
+
+  .yearAndTotalForTraining {
+    justify-self: flex-end !important;
+  }
+
+  .yearAndTotalAndAuthorForTraining {
+    justify-content: flex-end;
+  }
+
+  .LinesEllipsis {
+    width: 150px;
+  }
+
+  .author {
+    left: 42%;
   }
 }
 

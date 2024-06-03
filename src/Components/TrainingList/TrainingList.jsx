@@ -5,7 +5,8 @@ import { selectTrainingBookList } from "../../Redux/Auth/selectors";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { trainingItemDelete } from "../../Redux/Auth/slice";
-import { selectRunDate } from "../../Redux/Other/selectors";
+// import { selectRunDate } from "../../Redux/Other/selectors";
+import { selectRunDate } from "../../Redux/Auth/selectors";
 
 export function TrainingList({ onClick }) {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export function TrainingList({ onClick }) {
   }
 
   return (
-    <>
+    <div className={css.Box}>
       <GoingToRead value={books} onClickDelete={onClickDelete} />
       {books.length !== 0 && !runDate && (
         <div className={css.Button}>
@@ -29,6 +30,6 @@ export function TrainingList({ onClick }) {
           />
         </div>
       )}
-    </>
+    </div>
   );
 }

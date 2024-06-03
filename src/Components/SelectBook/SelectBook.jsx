@@ -24,7 +24,11 @@ export function SelectBook() {
   ];
 
   function onClick() {
-    dispatch(trainingBookList(selectedBook?.value));
+    if (selectedBook.value) {
+      dispatch(trainingBookList(selectedBook?.value));
+    } else {
+      return;
+    }
   }
 
   const customStyles = {
@@ -57,7 +61,7 @@ export function SelectBook() {
       <Button
         type={"button"}
         title={"Add select"}
-        className={"BookFormBtn"}
+        className={"StatisticFormBtn"}
         onClick={onClick}
       />
     </div>

@@ -4,11 +4,16 @@ import { selectLocation } from "../../Redux/Auth/selectors";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
 import LinesEllipsis from "react-lines-ellipsis";
+import { selectRunDate } from "../../Redux/Auth/selectors";
+import { useState } from "react";
 
 export function Book({ book, onClickDelete }) {
   const thisLocation = useSelector(selectLocation);
+  const RunDate = useSelector(selectRunDate);
   const location = thisLocation === "/training" ? true : false;
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isDesktop = useMediaQuery({ minWidth: 1150 });
+  const [isChecked, setIsChecked] = useState(true);
 
   const trainingItem = clsx(css.item, location && css.itemForTraining);
   const trainingtitleAndSvg = clsx(
@@ -40,13 +45,23 @@ export function Book({ book, onClickDelete }) {
   return (
     <li className={trainingItem}>
       <div className={trainingtitleAndSvg}>
-        <svg className={css.icon} width="22" height="17">
-          <use href="../../../public/symbol-defs.svg#icon-Flat"></use>
-        </svg>
+        {!location || !RunDate ? (
+          <svg className={css.icon} width="22" height="17">
+            <use href="../../../public/symbol-defs.svg#icon-Flat"></use>
+          </svg>
+        ) : (
+          <input
+            className={css.checkbox}
+            type="checkbox"
+            checked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+          />
+        )}
         {!location ? (
           <p className={trainingTitle}>{book.title}</p>
         ) : (
           <LinesEllipsis
+            className={css.LinesEllipsis}
             text={truncatedTitle}
             ellipsis="..."
             basedOn="words"
@@ -67,7 +82,7 @@ export function Book({ book, onClickDelete }) {
             <p className={css.pagesTotal}>{book.pagesTotal}</p>
           </div>
         </div>
-        {location && (
+        {(location || !isDesktop) && (
           <svg
             className={css.iconDelete}
             width="14"

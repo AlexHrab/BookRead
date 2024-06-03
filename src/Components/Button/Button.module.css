@@ -79,7 +79,8 @@
   color: #fff;
 }
 
-.BookFormBtn {
+.BookFormBtn,
+.StatisticFormBtn {
   width: 181px;
   height: 42px;
   border: 1px solid var(--deep-blue, #242a37);
@@ -143,11 +144,34 @@
   cursor: pointer;
 }
 
+.statistic {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff6b08;
+  color: #fff;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: none;
+  cursor: pointer;
+}
+
 /* ================================================================================================ */
 @media screen and (min-width: 768px) and (max-width: 1150px) {
   .BookFormBtn {
     margin: 40px auto 0;
     order: 1;
+  }
+
+  .statistic {
+    width: 240px;
+    margin-top: 18px;
   }
 }
 /* ============================================================================================= */

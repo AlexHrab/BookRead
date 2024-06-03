@@ -15,8 +15,7 @@
   width: 250px;
   height: 42px;
   outline: none;
-  /* display: flex;
-  align-items: center; */
+
   color: #a6abb9;
   font-family: Montserrat;
   font-size: 14px;
@@ -24,4 +23,19 @@
   font-weight: 500;
   line-height: normal;
   padding: 12px 12px 12px 45px !important;
+}
+
+.picker {
+  width: 250px;
+  height: 42px;
+  position: relative;
+}
+
+.iconInput {
+  position: absolute;
+
+  fill: #c4c7d2;
+  top: 12px;
+
+  right: 7px;
 }

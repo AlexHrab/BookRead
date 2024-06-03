@@ -35,8 +35,10 @@
   border-top: 1px solid #e0e5eb;
   border-bottom: 1px solid #e0e5eb;
   /* margin-bottom: 12px; */
-  padding: 12px 161px 12px 0;
+  padding: 11px 161px 11px 0;
   margin-bottom: 0;
+  width: 928px;
+  box-sizing: border-box;
 }
 
 /* ================================================================================================ */
@@ -92,12 +94,12 @@ p {
 
 .listAndButtonfotTraining {
   position: static;
-  max-height: 212px;
-  padding: 22px 0 22px !important;
-  width: 928px !important;
+  max-height: 180px;
+  padding: 16px 0 16px;
+  width: 928px;
   overflow: auto;
   overflow-x: hidden;
-  flex: 1;
+  /* flex: 1; */
   border-bottom: 1px solid #e0e5eb;
   margin-bottom: 40px;
 }
@@ -126,6 +128,32 @@ p {
   .author {
     position: absolute;
     left: 47%;
+  }
+
+  .listAndButtonfotTraining {
+    position: static;
+    max-height: 180px;
+    padding: 16px 0 16px;
+    width: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+    flex: 1;
+    border-bottom: 1px solid #e0e5eb;
+    margin-bottom: 40px;
+  }
+
+  .titlesforTraining {
+    width: 100%;
+    padding-right: 58px;
+  }
+
+  .authorforTraining {
+    left: 42%;
+  }
+
+  .yearAndTotalforTraining {
+    gap: 30px;
+    width: 151px;
   }
 }
 

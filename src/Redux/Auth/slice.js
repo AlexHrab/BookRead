@@ -7,6 +7,7 @@ import {
   fetchLocation,
   addBook,
   greating,
+  getAllBooks,
 } from "./operations";
 
 const initialState = {
@@ -15,6 +16,9 @@ const initialState = {
     email: "",
     id: "",
   },
+  runDate: false,
+  startDate: "",
+  finishDate: "",
   trainingBookList: [],
   currentlyReading: [],
   finishedReading: [],
@@ -44,9 +48,9 @@ const slice = createSlice({
         state.refreshToken = payload.refreshToken;
         state.isLoggedIn = true;
         state.greating = true;
-        state.currentlyReading = payload.userData.currentlyReading;
-        state.finishedReading = payload.userData.finishedReading;
-        state.goingToRead = payload.userData.goingToRead;
+        // state.currentlyReading = payload.userData.currentlyReading;
+        // state.finishedReading = payload.userData.finishedReading;
+        // state.goingToRead = payload.userData.goingToRead;
       })
       .addCase(logout.fulfilled, (state) => {
         state.sid = null;
@@ -54,11 +58,27 @@ const slice = createSlice({
         state.refreshToken = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
+        state.startDate = "";
+        state.finishDate = "";
+        state.trainingBookList = [];
+        state.runDate = false;
+      })
+      .addCase(getAllBooks.fulfilled, (state, { payload }) => {
+        state.currentlyReading = payload.currentlyReading;
+        state.finishedReading = payload.finishedReading;
+        state.goingToRead = payload.goingToRead;
       })
       .addCase(refresh.fulfilled, (state, { payload }) => {
         state.sid = payload.newSid;
         state.accessToken = payload.newAccessToken;
         state.refreshToken = payload.newRefreshToken;
+        state.isRefreshing = false;
+      })
+      .addCase(refresh.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(refresh.rejected, (state) => {
+        state.isRefreshing = false;
       })
 
       .addCase(fetchLocation.fulfilled, (state, { payload }) => {
@@ -87,9 +107,24 @@ const slice = createSlice({
         (book) => book._id !== payload
       );
     },
+    userStartDate: (state, { payload }) => {
+      state.startDate = payload;
+    },
+    userFinishDate: (state, { payload }) => {
+      state.finishDate = payload;
+    },
+    runDate: (state, { payload }) => {
+      state.runDate = payload;
+    },
   },
 });
 
 export const authReducer = slice.reducer;
 
-export const { trainingBookList, trainingItemDelete } = slice.actions;
+export const {
+  trainingBookList,
+  trainingItemDelete,
+  userStartDate,
+  userFinishDate,
+  runDate,
+} = slice.actions;

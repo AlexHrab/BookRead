@@ -40,7 +40,7 @@
   border-radius: 0 !important;
   height: 157px;
   overflow: hidden;
-  width: 715px !important;
+  width: 715px;
   color: #898f9f !important;
   font-family: Montserrat !important;
   font-size: 14px !important;
@@ -72,4 +72,21 @@
 .input__option--is-focused {
   background: #f5f7fa !important;
   color: #898f9f !important;
+}
+
+/* ======================================================================================================= */
+
+@media screen and (min-width: 768px) and (max-width: 1150px) {
+  .input__control {
+    width: 483px;
+  }
+
+  .input__menu {
+    width: 483px;
+  }
+}
+
+/* ================================================================================================ */
+
+@media screen and (max-width: 767px) {
 }

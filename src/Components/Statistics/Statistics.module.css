@@ -1,0 +1,79 @@
+.labelBox {
+  display: flex;
+  gap: 20px;
+  box-sizing: border-box;
+  margin-bottom: 28px;
+}
+
+.timeInput,
+.pagesInput {
+  box-sizing: border-box;
+  width: 110px;
+  height: 42px;
+  border-radius: 0;
+  border: 1px solid #a6abb9;
+  background: #f6f7fb;
+  color: var(--deep-blue, #242a37);
+  font-family: Montserrat;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 4px;
+  outline: none;
+  padding: 12px 12px;
+}
+
+.timeInput,
+.pagesInput:focus {
+  border: 1px solid #a6abb9;
+}
+
+.Label {
+  box-sizing: border-box;
+  color: #898f9f;
+  font-family: Montserrat;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0 !important;
+}
+
+.timeInputWrapper {
+  position: relative;
+}
+
+.iconInput {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  fill: #c4c7d2;
+  top: 20px;
+
+  right: 6px;
+}
+
+/* =======================================================================================================  */
+
+@media screen and (min-width: 768px) and (max-width: 1150px) {
+  .BookForm {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 28px 96px;
+    justify-content: space-between;
+  }
+
+  .labelBox {
+    display: flex;
+    gap: 20px;
+    box-sizing: border-box;
+    margin-bottom: 28px;
+  }
+}
+
+/* ================================================================================================ */
+
+@media screen and (max-width: 767px) {
+}

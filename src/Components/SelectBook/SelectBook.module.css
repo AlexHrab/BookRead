@@ -1,4 +1,19 @@
 .selectBox {
   display: flex;
-  margin-bottom: 23px;
+  margin-bottom: 28px;
+  width: 928px;
+}
+
+/* ==================================================================================================== */
+
+@media screen and (min-width: 768px) and (max-width: 1150px) {
+  .selectBox {
+    width: 100%;
+    align-items: center;
+  }
+}
+
+/* ================================================================================================= */
+
+@media screen and (max-width: 767px) {
 }

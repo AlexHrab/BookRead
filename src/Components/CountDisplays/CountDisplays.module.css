@@ -58,7 +58,7 @@
   flex-direction: column;
 
   align-items: center;
-  margin-bottom: 44px;
+  margin-bottom: 22px;
 }
 
 .title {
@@ -71,4 +71,17 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+
+/* ======================================================================================================= */
+
+@media screen and (min-width: 768px) and (max-width: 1150px) {
+  .timerBox {
+    margin: 0;
+  }
+}
+
+/* ================================================================================================ */
+
+@media screen and (max-width: 767px) {
 }
