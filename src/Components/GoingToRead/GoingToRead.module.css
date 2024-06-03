@@ -144,11 +144,11 @@ p {
 
   .titlesforTraining {
     width: 100%;
-    padding-right: 58px;
+    padding-right: 96px;
   }
 
   .authorforTraining {
-    left: 42%;
+    left: 37%;
   }
 
   .yearAndTotalforTraining {
@@ -159,28 +159,24 @@ p {
 
 /* =================================================================================================== */
 
-/* @media screen and (max-width: 767px) {
-  .home {
-    padding: 32px;
+@media screen and (max-width: 767px) {
+  .titlesforTraining {
+    width: 100%;
   }
 
-  .yearAndTotalAndAuthor {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    align-items: flex-start;
-    font-size: 12px;
-    position: absolute;
-  }
-
-  .author {
+  .listAndButtonfotTraining {
     position: static;
+    width: 100%;
+    margin-top: 20px;
   }
 
-  .yearAndTotal {
-    width: auto;
-    flex-direction: column;
-    gap: 9px;
-    align-items: flex-start;
+  .listAndButtonfotTraining {
+    padding: 0;
+
+    border-top: 1px solid #e0e5eb;
   }
-} */
+
+  .listAndButtonfotTraining {
+    margin: 0;
+  }
+}

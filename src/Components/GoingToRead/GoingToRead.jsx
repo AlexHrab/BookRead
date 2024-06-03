@@ -48,7 +48,7 @@ export function GoingToRead({ onClick, value, onClickDelete }) {
           ))}
           {location && <li>{element}</li>}
         </ul>
-        {isMobile && (
+        {isMobile && !location && (
           <Button type={"button"} onClick={onClick} className={"mobileForm"}>
             <svg className={css.icon} width="16" height="16">
               <use href="../../../public/symbol-defs.svg#icon-cross"></use>

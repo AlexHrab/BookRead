@@ -90,6 +90,8 @@
   fill: #a6abb9;
   flex-shrink: 0;
   cursor: pointer;
+  position: absolute;
+  right: 32px;
 }
 
 .titleForTraining {
@@ -124,19 +126,12 @@
     text-align: left;
   }
 
-  .author {
-    width: 120px;
-    position: absolute;
-    left: 47%;
-    text-align: left;
-  }
-
   .titleAndSvg {
     gap: 8px;
   }
 
   .itemForTraining {
-    padding: 0 70px 0 0;
+    padding: 0 32px 0 0;
     box-shadow: none;
     box-sizing: border-box;
     background: transparent;
@@ -144,7 +139,7 @@
   }
 
   .yearAndTotalForTraining {
-    justify-self: flex-end !important;
+    margin-right: 80px;
   }
 
   .yearAndTotalAndAuthorForTraining {
@@ -156,7 +151,22 @@
   }
 
   .author {
-    left: 42%;
+    width: 120px;
+    position: absolute;
+    left: 47%;
+    text-align: left;
+  }
+
+  /* .author {
+    left: 37%;
+  } */
+
+  .authorForTraining {
+    left: 37%;
+  }
+
+  .iconDelete {
+    right: 16px;
   }
 }
 

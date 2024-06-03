@@ -1,8 +1,37 @@
 .spanBox {
   display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.Box {
+  padding: 32px 0 32px;
+}
+
+.fild {
+  display: flex;
   gap: 10px;
 }
 
 .icon {
   fill: #a6abb9;
+}
+
+.spanWrapper {
+  position: relative;
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #898f9f;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.span {
+  position: absolute;
+  left: 60px;
 }

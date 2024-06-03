@@ -31,6 +31,8 @@ export function Book({ book, onClickDelete }) {
     location && css.yearAndTotalAndAuthorForTraining
   );
 
+  // const trainingTitle = clsx(css.title, location && css.titleForTraining);
+
   function truncateText(text, maxLength) {
     if (text?.length <= maxLength) {
       return text;
@@ -82,7 +84,7 @@ export function Book({ book, onClickDelete }) {
             <p className={css.pagesTotal}>{book.pagesTotal}</p>
           </div>
         </div>
-        {(location || !isDesktop) && (
+        {(location || !isDesktop) && !RunDate && (
           <svg
             className={css.iconDelete}
             width="14"

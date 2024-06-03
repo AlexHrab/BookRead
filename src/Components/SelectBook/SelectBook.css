@@ -33,7 +33,7 @@
 .input__menu-list {
   height: 157px;
   overflow: hidden;
-  width: 715px !important;
+  width: 715px;
 }
 
 .input__menu {
@@ -89,4 +89,11 @@
 /* ================================================================================================ */
 
 @media screen and (max-width: 767px) {
+  .input__control {
+    width: 280px;
+  }
+
+  .input__menu {
+    width: 280px;
+  }
 }

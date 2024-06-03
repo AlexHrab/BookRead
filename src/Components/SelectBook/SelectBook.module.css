@@ -16,4 +16,9 @@
 /* ================================================================================================= */
 
 @media screen and (max-width: 767px) {
+  .selectBox {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
 }

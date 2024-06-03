@@ -7,7 +7,8 @@ import { TrainingList } from "../../Components/TrainingList/TrainingList";
 import { useState } from "react";
 import { useEffect } from "react";
 import { ConvertMs } from "../../Components/Convert/Convert";
-
+import { Menu } from "./Menu";
+import { useMediaQuery } from "react-responsive";
 // import { runDate } from "../../Redux/Auth/slice";
 // import { selectRunDate } from "../../Redux/Auth/selectors";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,6 +36,7 @@ import {
   getPlaning,
   deleteBook,
 } from "../../Redux/Auth/operations";
+import { Button } from "../../Components/Button/Button";
 
 export function Training() {
   const dispatch = useDispatch();
@@ -44,11 +46,19 @@ export function Training() {
   const books = useSelector(selectTrainingBookList);
   const currentDate = Date.now();
   const currentlyReading = useSelector(selectCurrentlyReading);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const isCurrentlyReading = currentlyReading.length !== 0 ? true : false;
   // console.log(isCurrentlyReading);
 
   const [goalsCount, setGoalsCount] = useState({});
   const [yearCount, setYearCount] = useState({});
+  const [showMenu, setShowMenu] = useState(false);
+
+  function menuShow() {
+    setShowMenu(true);
+  }
+
+  console.log(showMenu);
 
   // console.log(formatDate(startDate));
   const booksId = [];
@@ -153,48 +163,57 @@ export function Training() {
       <div className={css.countsAndGoals}>
         <div className={css.listAndAll}>
           <div className={css.goalsAndTrainingList}>
-            <Goals days={days} />
-            {userRunDate ? (
+            {(!showMenu || !isMobile) && <Goals days={days} />}
+            {userRunDate && (
               <div className={css.counts}>
                 <CountDisplays title={"Years countdown"} value={yearCount} />
                 <CountDisplays title={"Goals countdown"} value={goalsCount} />
               </div>
-            ) : (
-              <div className={css.trainingAndCalendars}>
-                <MyTraining />
+            )}
 
-                <div className={css.calendars}>
-                  <Calendar
-                    title={"Start"}
-                    date={startDate}
-                    setDate={setStartDate}
-                  />
-                  <Calendar
-                    title={"Finish"}
-                    date={finishDate}
-                    setDate={setFinishDate}
-                  />
-                </div>
-                <SelectBook />
-              </div>
+            {(!isMobile || showMenu) && (
+              <Menu
+                startDate={startDate}
+                setStartDate={setStartDate}
+                titleStart={"Start"}
+                finishDate={finishDate}
+                setFinishDate={setFinishDate}
+                titleFinish={"Finish"}
+              />
             )}
           </div>
 
-          <TrainingList onClick={onClick} />
+          {(!showMenu || !isMobile) && <TrainingList onClick={onClick} />}
         </div>
       </div>
 
-      <div className={css.statisticsAndSchedule}>
-        <div className={css.Schedule}></div>
+      {(!showMenu || !isMobile) && (
+        <div className={css.statisticsAndSchedule}>
+          <div className={css.Schedule}>
+            {isMobile && (
+              <Button
+                type={"button"}
+                onClick={menuShow}
+                className={"mobileForm"}
+              >
+                <svg className={css.iconBtn} width="16" height="16">
+                  <use href="../../../public/symbol-defs.svg#icon-cross"></use>
+                </svg>
+              </Button>
+            )}
+          </div>
 
-        <div className={css.statistics}>
-          <Statistics
-            statisticsDate={statisticsDate}
-            setStatisticsDate={setStatisticsDate}
-            submit={statisticsSubmit}
-          />
+          {(userRunDate || !isMobile) && (
+            <div className={css.statistics}>
+              <Statistics
+                statisticsDate={statisticsDate}
+                setStatisticsDate={setStatisticsDate}
+                submit={statisticsSubmit}
+              />
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </div>
   );
 }

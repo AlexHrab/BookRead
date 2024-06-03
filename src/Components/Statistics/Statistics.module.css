@@ -76,4 +76,11 @@
 /* ================================================================================================ */
 
 @media screen and (max-width: 767px) {
+  .BookForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    /* justify-content: space-between; */
+  }
 }

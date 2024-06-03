@@ -94,6 +94,10 @@
   width: 928px;
 }
 
+.iconBtn {
+  fill: white;
+}
+
 /* ======================================================================================================= */
 
 @media screen and (min-width: 768px) and (max-width: 1150px) {
@@ -111,10 +115,6 @@
 
   .countsAndGoals {
     flex-direction: column;
-  }
-
-  .Schedule {
-    width: 100%;
   }
 
   .statisticsAndSchedule {
@@ -155,6 +155,8 @@
 
   .Schedule {
     margin-bottom: 40px;
+
+    width: 100%;
   }
 
   .statistics {
@@ -166,4 +168,45 @@
 /* ================================================================================================ */
 
 @media screen and (max-width: 767px) {
+  .Training {
+    padding: 20px;
+  }
+  .statisticsAndSchedule {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .Schedule {
+    width: 100%;
+    position: relative;
+  }
+
+  .trainingAndCalendars {
+    order: 6;
+    width: 100%;
+  }
+
+  .countsAndGoals {
+    margin: 0;
+  }
+
+  .statistics {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .counts {
+    order: 1;
+    padding: 0;
+    gap: 24px;
+    flex-direction: column;
+  }
+
+  .goalsAndTrainingList {
+    flex-direction: column;
+  }
+
+  .listAndAll {
+    order: 3;
+  }
 }
