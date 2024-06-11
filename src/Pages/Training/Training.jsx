@@ -62,7 +62,7 @@ export function Training() {
   const finishBook = useSelector(selectFinishedReading);
   const pageSum = useSelector(selectSum);
   const onlyRead = useSelector(selectOnlyRead);
-  // console.log(userRunDate);
+  console.log(finishBook);
   // console.log(finishDate.getTime());
 
   const [goalsCount, setGoalsCount] = useState({});

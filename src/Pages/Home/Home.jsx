@@ -19,6 +19,7 @@ import {
 } from "../../Redux/Auth/selectors";
 import { BookModal } from "../../Components/Modal/Modal";
 import { getAllBooks } from "../../Redux/Auth/operations";
+import { RatingModal } from "../../Components/Book/RatingModal";
 
 export function Home() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -32,6 +33,8 @@ export function Home() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [showContent, setShowContent] = useState(false);
+  const [modalRatingIsOpen, setModalRatingIsOpen] = useState(false);
+  const [id, setId] = useState("");
 
   useEffect(() => {
     if (userGreating) {
@@ -48,6 +51,15 @@ export function Home() {
   function close() {
     setModalIsOpen(false);
     dispatch(greating(false));
+  }
+
+  function closeRating() {
+    setModalRatingIsOpen(false);
+  }
+
+  function openRating(id) {
+    setModalRatingIsOpen(true);
+    setId(id);
   }
 
   function content() {
@@ -77,6 +89,7 @@ export function Home() {
         <div className={css.readingList}>
           {finishedReading.length !== 0 && (
             <GoingToRead
+              onClickRating={openRating}
               onClick={content}
               value={finishedReading}
               title={"Already read"}
@@ -147,6 +160,7 @@ export function Home() {
           )}
         </BookModal>
       )}
+      <RatingModal isOpen={modalRatingIsOpen} onClose={closeRating} id={id} />
     </div>
   );
 }

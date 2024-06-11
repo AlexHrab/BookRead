@@ -164,3 +164,25 @@ export const getAllBooks = createAsyncThunk(
     }
   }
 );
+
+export const bookReview = createAsyncThunk(
+  "auth/review",
+  async (value, thunkAPI) => {
+    // const token = thunkAPI.getState().auth.accessToken;
+    // if (!token) {
+    //   return;
+    // }
+    // addAccessToken(token);
+    try {
+      const data = await baseUrl.patch(`/book/review/${value.id}`, {
+        rating: value.rating,
+        feedback: value.feedback,
+      });
+      // addAccessToken(data.data.accessToken);
+
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(alert(error.message));
+    }
+  }
+);

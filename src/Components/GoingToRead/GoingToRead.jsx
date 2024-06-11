@@ -9,7 +9,13 @@ import clsx from "clsx";
 import { DefaultElement } from "../DefaultElement/DefaultElement";
 import { selectTrainingBookList } from "../../Redux/Auth/selectors";
 
-export function GoingToRead({ onClick, value, onClickDelete, title }) {
+export function GoingToRead({
+  onClick,
+  value,
+  onClickDelete,
+  title,
+  onClickRating,
+}) {
   const thisLocation = useSelector(selectLocation);
   const location = thisLocation === "/training" ? true : false;
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -53,6 +59,7 @@ export function GoingToRead({ onClick, value, onClickDelete, title }) {
               book={el}
               onClickDelete={onClickDelete}
               title={title}
+              onClickRating={onClickRating}
             />
           ))}
           {location && (!trainingBookList.length || !isMobile) && (
