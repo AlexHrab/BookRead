@@ -3,6 +3,8 @@
   padding: 40px 16px;
   /* display: flex;
   flex-direction: column; */
+
+  height: 100%;
 }
 
 /* .countsAndTrainingAndCalendarsAndGoals {
@@ -55,6 +57,7 @@
   padding: 20px 24px;
   background: #fff;
   box-shadow: 0px 2px 3px 0px rgba(9, 30, 63, 0.1);
+  overflow: hidden;
 }
 
 .Schedule {
@@ -96,6 +99,13 @@
 
 .iconBtn {
   fill: white;
+}
+
+.iconBack {
+  /* z-index: 111; */
+  fill: #ff6b08;
+  margin-bottom: 32px;
+  /* text-align: left; */
 }
 
 /* ======================================================================================================= */
@@ -169,7 +179,7 @@
 
 @media screen and (max-width: 767px) {
   .Training {
-    padding: 20px;
+    padding: 24px 20px;
   }
   .statisticsAndSchedule {
     flex-direction: column;

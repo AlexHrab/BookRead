@@ -1,0 +1,43 @@
+.BookModalGoalSvg,
+.BookModalReadSvg {
+  fill: #ff6b08;
+}
+
+.BookModalTimeSvg {
+  fill: #a6abb9;
+}
+
+.BookModalGoal,
+.BookModalTime,
+.BookModalRead {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.BookModalGoalText,
+.BookModalTimeText,
+.BookModalReadText {
+  color: var(--deep-blue, #242a37);
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  width: 300px;
+  line-height: 22px; /* 137.5% */
+  margin: 16px 0 auto;
+}
+
+.btnBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.BookModalReadText {
+  width: 200px;
+}

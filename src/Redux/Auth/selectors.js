@@ -1,3 +1,5 @@
+import { createSelector } from "@reduxjs/toolkit";
+
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectLocation = (state) => state.auth.location;
 export const selectUserName = (state) => state.auth.userData.name;
@@ -10,3 +12,21 @@ export const selectUserFinishDate = (state) => state.auth.finishDate;
 export const selectRunDate = (state) => state.auth.runDate;
 export const selectRefresh = (state) => state.auth.isRefreshing;
 export const selectAccessToken = (state) => state.auth.accessToken;
+export const selectFinishedReading = (state) => state.auth.finishedReading;
+export const selectStats = (state) => state.auth.stats;
+export const selectSum = (state) => state.auth.BooksPageSum;
+export const selectOnlyRead = (state) => state.auth.onlyRead;
+export const selectBooksLeft = (state) => state.auth.booksLeft;
+
+// export const selectListMemo = createSelector(
+//   [selectTrainingBookList, selectFinishedReading],
+//   (bookList, finishBookList) => {
+//     return bookList.map((item1) => {
+//       const isReading = finishBookList.find((item2) => item2._id === item1._id);
+//       if (isReading) {
+//         return { ...item1, isChecked: true };
+//       }
+//       return { ...item1, isChecked: false };
+//     });
+//   }
+// );

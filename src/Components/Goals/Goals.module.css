@@ -1,7 +1,7 @@
 .goals {
   /* order: 1; */
   width: 288px;
-  height: 329px;
+  height: 100%;
   background: #fff;
   display: flex;
   box-sizing: border-box;
@@ -49,6 +49,10 @@
   font-style: normal;
   font-weight: 700;
   line-height: 38px; /* 105.556% */
+}
+
+.value_special {
+  color: #ff6b08 !important;
 }
 
 .value_runDate {

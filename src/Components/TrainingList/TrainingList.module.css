@@ -1,8 +1,15 @@
 .Button {
   display: flex;
   justify-content: center;
+
+  margin-top: 32px;
 }
 
 /* .Box {
   order: 3;
 } */
+@media screen and (max-width: 767px) {
+  .Button {
+    margin-bottom: 32px;
+  }
+}

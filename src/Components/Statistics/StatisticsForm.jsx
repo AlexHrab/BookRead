@@ -7,6 +7,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "../Button/Button";
 import { FaAngleDown } from "react-icons/fa6";
+import { selectStats } from "../../Redux/Auth/selectors";
+import { useSelector } from "react-redux";
 
 const SignupSchema = yup.object().shape({
   title: yup
@@ -39,6 +41,16 @@ export function StatisticsForm({ statisticsDate, setStatisticsDate, submit }) {
   //   const isMobile = useMediaQuery({ maxWidth: 767 });
   const dispath = useDispatch();
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const stats = useSelector(selectStats);
+  // console.log(stats);
+
+  let total = 0;
+
+  for (const stat of stats) {
+    total += stat.pagesCount;
+  }
+
+  // console.log(total);
 
   // function Submit(values, actions) {
 
@@ -58,7 +70,7 @@ export function StatisticsForm({ statisticsDate, setStatisticsDate, submit }) {
     >
       <Form className={css.BookForm}>
         <div className={css.labelBox}>
-          <label htmlFor="date" className={css.Label}>
+          {/* <label htmlFor="date" className={css.Label}>
             Date
             <Field name="date" id="date">
               {({ field }) => (
@@ -89,7 +101,14 @@ export function StatisticsForm({ statisticsDate, setStatisticsDate, submit }) {
                 </div>
               )}
             </Field>
-          </label>
+          </label> */}
+
+          <div className={css.totalPagesBoxWrapper}>
+            <span className={css.totalPagesText}>Total of pages</span>
+            <div className={css.totalPagesBox}>
+              <span>{total}</span>
+            </div>
+          </div>
 
           <label htmlFor="pages" className={css.Label}>
             Amount of pages

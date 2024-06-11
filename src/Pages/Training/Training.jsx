@@ -21,13 +21,19 @@ import {
   selectUserFinishDate,
   selectUserStartDate,
   selectCurrentlyReading,
+  selectSum,
+  selectAccessToken,
+  selectFinishedReading,
+  selectOnlyRead,
 } from "../../Redux/Auth/selectors";
 
-// import {
-//   selectUserFinishDate,
-//   selectUserStartDate,
-// } from "../../Redux/Auth/selectors";
-import { userStartDate, userFinishDate, runDate } from "../../Redux/Auth/slice";
+import {
+  userStartDate,
+  userFinishDate,
+  runDate,
+  BooksPageSum,
+  setBooksLeft,
+} from "../../Redux/Auth/slice";
 import { DataFunction, formatDate } from "./DataFunction";
 import { Statistics } from "../../Components/Statistics/Statistics";
 import {
@@ -35,41 +41,62 @@ import {
   sendPages,
   getPlaning,
   deleteBook,
+  refresh,
+  getAllBooks,
 } from "../../Redux/Auth/operations";
 import { Button } from "../../Components/Button/Button";
+import { ModalTime, ModalGoal, ModalBookRead } from "./Modals";
 
 export function Training() {
   const dispatch = useDispatch();
   const userRunDate = useSelector(selectRunDate);
+  const defaultFinishDate = useSelector(selectUserFinishDate);
   const startDate = DataFunction(useSelector(selectUserStartDate));
   const finishDate = DataFunction(useSelector(selectUserFinishDate));
   const books = useSelector(selectTrainingBookList);
   const currentDate = Date.now();
   const currentlyReading = useSelector(selectCurrentlyReading);
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const isCurrentlyReading = currentlyReading.length !== 0 ? true : false;
-  // console.log(isCurrentlyReading);
+  // const isCurrentlyReading = currentlyReading.length !== 0 ? true : false;
+  // const accessToken = useSelector(selectAccessToken);
+  const finishBook = useSelector(selectFinishedReading);
+  const pageSum = useSelector(selectSum);
+  const onlyRead = useSelector(selectOnlyRead);
+  // console.log(userRunDate);
+  // console.log(finishDate.getTime());
 
   const [goalsCount, setGoalsCount] = useState({});
   const [yearCount, setYearCount] = useState({});
   const [showMenu, setShowMenu] = useState(false);
+  const [stopGoalsInterval, setStopGoalsInterval] = useState(false);
+  const [stopYearInterval, setStopYearInterval] = useState(false);
+  const [modalTimeIsOpen, setModalTimeIsOpen] = useState(false);
+  const [modalGoalIsOpen, setModalGoalIsOpen] = useState(false);
+  const [modalBookReadOpen, setModalBookReadOpen] = useState(false);
+  const [finishBookLenth, setFinishBookLenth] = useState(finishBook.length);
+  const [finishBookLenthMemo] = useState(finishBook.length);
+
+  function closeTime() {
+    setModalTimeIsOpen(false);
+  }
+
+  function closeGoal() {
+    setModalGoalIsOpen(false);
+  }
+
+  function closeBookRead() {
+    setModalBookReadOpen(false);
+  }
 
   function menuShow() {
     setShowMenu(true);
   }
 
-  console.log(showMenu);
-
-  // console.log(formatDate(startDate));
   const booksId = [];
 
   for (const book of books) {
     booksId.push(book._id);
   }
-
-  // const booksPages = books.map((book) => book.pagesTotal);
-  // console.log(booksPages);
-  // console.log(0 - 1);
 
   function setStartDate(date) {
     const startDateValue = date ? date.toString() : ""; // Перевіряємо, чи дата не порожня
@@ -95,13 +122,20 @@ export function Training() {
       startDate.getTime() > Date.now()
     ) {
       dispatch(runDate(true));
-      // dispatch(
-      //   startTraining({
-      //     startDate: formatDate(startDate),
-      //     endDate: formatDate(finishDate),
-      //     books: booksId,
-      //   })
-      // );
+      // console.log("hello");
+      dispatch(
+        startTraining({
+          startDate: formatDate(startDate),
+          endDate: formatDate(finishDate),
+          books: booksId,
+        })
+      )
+        .unwrap()
+        .then((res) => dispatch(getAllBooks()))
+        .catch((error) => alert(error.message), dispatch(getAllBooks()));
+      dispatch(BooksPageSum());
+      dispatch(setBooksLeft());
+      // setShowMenu(false);
     } else {
       alert(
         "поля повинні бути заповнені і дата початку тренування не повинна бути в минулому"
@@ -109,57 +143,147 @@ export function Training() {
     }
   }
 
+  function backClick() {
+    setShowMenu(false);
+  }
+
+  useEffect(() => {
+    if (
+      finishBook.length === 0 ||
+      finishBook.length === finishBookLenth ||
+      onlyRead >= pageSum
+    ) {
+      return;
+    } else {
+      setModalBookReadOpen(true);
+    }
+    setFinishBookLenth(finishBook.length);
+  }, [finishBook]);
+
+  useEffect(() => {
+    if (
+      onlyRead < pageSum &&
+      stopGoalsInterval &&
+      userRunDate &&
+      !modalGoalIsOpen
+    ) {
+      setModalTimeIsOpen(true);
+    }
+  }, [stopGoalsInterval, userRunDate, books, finishBook]);
+
+  // console.log(finishBook.length + books.length - finishBook.length);
+  // console.log(finishBook.length);
+  // console.log(finishBookLenthMemo);
+  // console.log(onlyRead);
+  // console.log(modalGoalIsOpen);
+
+  useEffect(() => {
+    if (
+      stopGoalsInterval &&
+      stopYearInterval &&
+      onlyRead >= pageSum &&
+      // currentlyReading.length === 0 &&
+      userRunDate
+    ) {
+      setModalGoalIsOpen(true);
+      // setModalTimeIsOpen(false);
+    }
+  }, [stopGoalsInterval, stopYearInterval, books, finishBook, userRunDate]);
+
   useEffect(() => {
     if (startDate && finishDate && userRunDate) {
-      const intervalId = setInterval(() => {
+      const intervalGoalsId = setInterval(() => {
+        if (stopGoalsInterval) {
+          return;
+        }
+
         const currentDate = Date.now();
 
         const futureDate = new Date(finishDate).getTime();
         const diff = futureDate - currentDate;
+
         if (Date.now() >= startDate.getTime()) {
           setGoalsCount(ConvertMs(diff));
         }
-        if (diff < 1000) {
-          clearInterval(intervalId);
+        if (diff < 1000 || !userRunDate) {
+          setStopGoalsInterval(true);
+        }
+        if (onlyRead >= pageSum) {
+          setStopGoalsInterval(true);
+          // clearInterval(intervalGoalsId);
         }
       }, 1000);
+      return () => clearInterval(intervalGoalsId);
     }
   }, [startDate, finishDate, userRunDate]);
 
   useEffect(() => {
     if (userRunDate) {
-      const intervalId = setInterval(() => {
+      const intervalYearId = setInterval(() => {
+        if (stopYearInterval) {
+          return;
+        }
+
         const currentDate = Date.now();
         const nextYear = new Date().getFullYear() + 1;
         const lastDayOfYear = new Date(nextYear, 0, 0).getTime();
         const diff = lastDayOfYear - currentDate;
         setYearCount(ConvertMs(diff));
 
-        if (diff < 1000) {
-          clearInterval(intervalId);
+        if (diff < 1000 || !userRunDate) {
+          setStopYearInterval(true);
+          // clearInterval(intervalYearId);
+        }
+        if (onlyRead >= pageSum) {
+          setStopYearInterval(true);
         }
       }, 1000);
+      return () => clearInterval(intervalYearId);
     }
-  }, [userRunDate]);
+  }, [userRunDate, currentDate]);
 
-  // useEffect(() => {
-  //   dispatch(getPlaning());
-  // }, [dispatch]);
+  // console.log(userRunDate);
+
+  useEffect(() => {
+    if (userRunDate) {
+      // dispatch(getPlaning());
+      dispatch(BooksPageSum());
+    }
+  }, [dispatch, userRunDate]);
 
   // ====================================================================================================
 
-  const [statisticsDate, setStatisticsDate] = useState();
-
   function statisticsSubmit(values, actions) {
-    dispatch(sendPages({ pages: values.pages }));
-    // dispatch(deleteBook());
+    if (startDate.getTime() < Date.now()) {
+      dispatch(sendPages({ pages: Number(values.pages) }))
+        .unwrap()
+        .then((res) => dispatch(getAllBooks()))
+        .then((res) => dispatch(setBooksLeft()))
+        .catch((error) => alert(error.message));
+      // dispatch(setBooksLeft());
+    } else {
+      actions.resetForm();
+    }
+
     actions.resetForm();
   }
+
+  // console.log(books);
 
   // ================================================================================================
 
   return (
     <div className={css.Training}>
+      {showMenu && (
+        <svg
+          className={css.iconBack}
+          width="24"
+          height="12"
+          onClick={backClick}
+        >
+          <use href="../../../public/symbol-defs.svg#icon-back"></use>
+        </svg>
+      )}
       <div className={css.countsAndGoals}>
         <div className={css.listAndAll}>
           <div className={css.goalsAndTrainingList}>
@@ -171,7 +295,7 @@ export function Training() {
               </div>
             )}
 
-            {(!isMobile || showMenu) && (
+            {((!isMobile && !userRunDate) || (showMenu && isMobile)) && (
               <Menu
                 startDate={startDate}
                 setStartDate={setStartDate}
@@ -179,18 +303,21 @@ export function Training() {
                 finishDate={finishDate}
                 setFinishDate={setFinishDate}
                 titleFinish={"Finish"}
+                onClick={onClick}
               />
             )}
           </div>
 
-          {(!showMenu || !isMobile) && <TrainingList onClick={onClick} />}
+          {(!showMenu || !isMobile) && (
+            <TrainingList onClick={onClick} books={books} />
+          )}
         </div>
       </div>
 
       {(!showMenu || !isMobile) && (
         <div className={css.statisticsAndSchedule}>
           <div className={css.Schedule}>
-            {isMobile && (
+            {isMobile && !userRunDate && (
               <Button
                 type={"button"}
                 onClick={menuShow}
@@ -206,14 +333,29 @@ export function Training() {
           {(userRunDate || !isMobile) && (
             <div className={css.statistics}>
               <Statistics
-                statisticsDate={statisticsDate}
-                setStatisticsDate={setStatisticsDate}
+                // statisticsDate={statisticsDate}
+                // setStatisticsDate={setStatisticsDate}
                 submit={statisticsSubmit}
               />
             </div>
           )}
         </div>
       )}
+      <ModalTime
+        isOpen={modalTimeIsOpen}
+        onClose={closeTime}
+        setModalTimeIsOpen={setModalTimeIsOpen}
+      />
+      <ModalGoal
+        isOpen={modalGoalIsOpen}
+        onClose={closeGoal}
+        setModalGoalIsOpen={setModalGoalIsOpen}
+      />
+      <ModalBookRead
+        isOpen={modalBookReadOpen}
+        onClose={closeBookRead}
+        setModalBookReadOpen={setModalBookReadOpen}
+      />
     </div>
   );
 }

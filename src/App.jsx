@@ -12,7 +12,16 @@ import { useEffect } from "react";
 import { PrivateRoute } from "../Routes/PrivateRoute";
 import { PublicRoute } from "../Routes/PublicRoute";
 import { useLocation } from "react-router-dom";
-import { selectIsLoggedIn, selectLocation } from "./Redux/Auth/selectors";
+import {
+  selectIsLoggedIn,
+  selectLocation,
+  selectAccessToken,
+  selectCurrentlyReading,
+  selectGoingToRead,
+  selectFinishedReading,
+  selectRefresh,
+} from "./Redux/Auth/selectors";
+import { getAllBooks } from "./Redux/Auth/operations";
 import { useSelector } from "react-redux";
 import { Layout } from "./Components/Layout/Layout";
 import { Info } from "./Pages/Info/Info";
@@ -29,15 +38,32 @@ function App() {
   const link = location.pathname;
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const thisLocation = useSelector(selectLocation);
+  const accessToken = useSelector(selectAccessToken);
+  const refreshBooks = useSelector(selectRefresh);
+
+  const goingToRead = useSelector(selectGoingToRead);
+  const finishedReading = useSelector(selectFinishedReading);
+  const currentlyReading = useSelector(selectCurrentlyReading);
 
   useEffect(() => {
-    dispatch(refresh());
+    if (isLoggedIn) {
+      dispatch(refresh())
+        .unwrap()
+        .then((res) => dispatch(getAllBooks()))
+        .catch((error) => alert(error.message));
+    }
     if (isLoggedIn) {
       dispatch(fetchLocation(link));
     } else {
       return;
     }
   }, [dispatch, link]);
+
+  // useEffect(() => {
+  //   if (accessToken) {
+  //     dispatch(getAllBooks());
+  //   }
+  // }, [dispatch, accessToken]);
 
   return (
     <>

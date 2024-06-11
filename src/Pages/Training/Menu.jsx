@@ -2,6 +2,8 @@ import css from "./Menu.module.css";
 import { MyTraining } from "../../Components/MyTraining/MyTraining";
 import { Calendar } from "../../Components/Calendar/Calendar";
 import { SelectBook } from "../../Components/SelectBook/SelectBook";
+import { Button } from "../../Components/Button/Button";
+import { useMediaQuery } from "react-responsive";
 
 export function Menu({
   startDate,
@@ -10,7 +12,9 @@ export function Menu({
   finishDate,
   setFinishDate,
   titleFinish,
+  onClick,
 }) {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   return (
     <div className={css.trainingAndCalendars}>
       <MyTraining />

@@ -18,7 +18,8 @@ const persistConfig = {
   key: "auth",
   version: 1,
   storage,
-  // whitelist: ["sid"],
+  // whitelist: ["trainingBookList"],
+  // blacklist: ["trainingBookList"],
 };
 
 export const store = configureStore({

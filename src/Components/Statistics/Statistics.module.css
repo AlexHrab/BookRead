@@ -2,7 +2,7 @@
   display: flex;
   gap: 20px;
   box-sizing: border-box;
-  margin-bottom: 28px;
+  margin-bottom: 12px;
 }
 
 .timeInput,
@@ -30,6 +30,8 @@
 }
 
 .Label {
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   color: #898f9f;
   font-family: Montserrat;
@@ -54,6 +56,49 @@
   right: 6px;
 }
 
+.totalPagesBox {
+  margin-top: 4px;
+  width: 110px;
+  height: 42px;
+  background: #f5f7fa;
+  box-shadow: 4px 4px 8px 0px rgba(36, 42, 55, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #091e3f;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 38px; /* 105.556% */
+}
+
+.totalPagesBoxWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.totalPagesText {
+  color: #898f9f;
+  font-family: Montserrat;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.wrapperTitle {
+  color: var(--deep-blue, #242a37);
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
 /* =======================================================================================================  */
 
 @media screen and (min-width: 768px) and (max-width: 1150px) {
@@ -61,8 +106,9 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 28px 96px;
+    /* padding: 28px 96px; */
     justify-content: space-between;
+    gap: 32px;
   }
 
   .labelBox {
@@ -70,6 +116,10 @@
     gap: 20px;
     box-sizing: border-box;
     margin-bottom: 28px;
+  }
+
+  .wrapper {
+    padding: 30px 96px;
   }
 }
 

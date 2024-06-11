@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   showContent: false,
-  runDate: false,
+  // runDate: false,
   startDate: "",
   finishDate: "",
 };
@@ -24,9 +24,9 @@ const slice = createSlice({
       .addCase(runDate.fulfilled, (state, { payload }) => {
         state.runDate = payload;
       })
-      .addCase(userStartDate.fulfilled, (state, { payload }) => {
-        state.startDate = payload;
-      })
+      // .addCase(userStartDate.fulfilled, (state, { payload }) => {
+      //   state.startDate = payload;
+      // })
       .addCase(userFinishDate.fulfilled, (state, { payload }) => {
         state.finishDate = payload;
       });

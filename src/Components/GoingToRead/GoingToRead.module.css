@@ -99,9 +99,9 @@ p {
   width: 928px;
   overflow: auto;
   overflow-x: hidden;
-  /* flex: 1; */
+
   border-bottom: 1px solid #e0e5eb;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
 }
 
 /* ================================================================================================== */
@@ -137,7 +137,7 @@ p {
     width: 100%;
     overflow: auto;
     overflow-x: hidden;
-    flex: 1;
+    position: static;
     border-bottom: 1px solid #e0e5eb;
     margin-bottom: 40px;
   }
@@ -168,15 +168,15 @@ p {
     position: static;
     width: 100%;
     margin-top: 20px;
-  }
-
-  .listAndButtonfotTraining {
     padding: 0;
-
+    margin: 0 0 32px;
     border-top: 1px solid #e0e5eb;
+    overflow: visible;
+    max-height: 100%;
   }
 
-  .listAndButtonfotTraining {
-    margin: 0;
+  .listforTraining {
+    gap: 0;
+    list-style-type: none;
   }
 }

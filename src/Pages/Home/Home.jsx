@@ -1,7 +1,7 @@
 import { BookForm } from "../../Components/BookAddForm/BookAddForm";
 import css from "./Home.module.css";
 import { useSelector } from "react-redux";
-import { selectGoingToRead } from "../../Redux/Auth/selectors";
+
 import { GoingToRead } from "../../Components/GoingToRead/GoingToRead";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "../../Components/Button/Button";
@@ -10,7 +10,13 @@ import { useDispatch } from "react-redux";
 import { greating } from "../../Redux/Auth/operations";
 import { useEffect } from "react";
 // import { useSelector } from "react-redux";
-import { selectGreating, selectAccessToken } from "../../Redux/Auth/selectors";
+import {
+  selectGreating,
+  selectAccessToken,
+  selectGoingToRead,
+  selectCurrentlyReading,
+  selectFinishedReading,
+} from "../../Redux/Auth/selectors";
 import { BookModal } from "../../Components/Modal/Modal";
 import { getAllBooks } from "../../Redux/Auth/operations";
 
@@ -19,6 +25,8 @@ export function Home() {
   const goingToRead = useSelector(selectGoingToRead);
   const accessToken = useSelector(selectAccessToken);
   const userGreating = useSelector(selectGreating);
+  const currentlyReading = useSelector(selectCurrentlyReading);
+  const finishedReading = useSelector(selectFinishedReading);
   // const isMobile = useMediaQuery({ maxWidth: 767 });
   const dispatch = useDispatch();
 
@@ -31,11 +39,11 @@ export function Home() {
     }
   }, [userGreating, modalIsOpen]);
 
-  useEffect(() => {
-    if (accessToken) {
-      dispatch(getAllBooks());
-    }
-  }, [dispatch, accessToken]);
+  // useEffect(() => {
+  //   if (accessToken) {
+  //     dispatch(getAllBooks());
+  //   }
+  // }, [dispatch, accessToken]);
 
   function close() {
     setModalIsOpen(false);
@@ -66,8 +74,28 @@ export function Home() {
       )}
       {(showContent || !isMobile) && <BookForm />}
       {!showContent && !userGreating && (
-        <div>
-          <GoingToRead onClick={content} value={goingToRead} />
+        <div className={css.readingList}>
+          {finishedReading.length !== 0 && (
+            <GoingToRead
+              onClick={content}
+              value={finishedReading}
+              title={"Already read"}
+            />
+          )}
+          {currentlyReading.length !== 0 && (
+            <GoingToRead
+              onClick={content}
+              value={currentlyReading}
+              title={"Reading now"}
+            />
+          )}
+          {goingToRead.length !== 0 && (
+            <GoingToRead
+              onClick={content}
+              value={goingToRead}
+              title={"Going to read"}
+            />
+          )}
         </div>
       )}
 

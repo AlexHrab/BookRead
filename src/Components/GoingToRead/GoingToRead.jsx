@@ -7,13 +7,17 @@ import { Button } from "../../Components/Button/Button";
 import { selectLocation } from "../../Redux/Auth/selectors";
 import clsx from "clsx";
 import { DefaultElement } from "../DefaultElement/DefaultElement";
+import { selectTrainingBookList } from "../../Redux/Auth/selectors";
 
-export function GoingToRead({ onClick, value, onClickDelete }) {
+export function GoingToRead({ onClick, value, onClickDelete, title }) {
   const thisLocation = useSelector(selectLocation);
   const location = thisLocation === "/training" ? true : false;
   const isMobile = useMediaQuery({ maxWidth: 767 });
   // const GoingToRead = useSelector(selectGoingToRead);
   const element = DefaultElement();
+  const trainingBookList = useSelector(selectTrainingBookList);
+
+  // console.log(value);
 
   const trainingList = clsx(css.list, location && css.listforTraining);
   const trainingListAndButton = clsx(
@@ -29,7 +33,7 @@ export function GoingToRead({ onClick, value, onClickDelete }) {
 
   return (
     <div>
-      {!location && <h4 className={css.title}>Going to read</h4>}
+      {!location && <h4 className={css.title}>{title}</h4>}
       {!isMobile && (
         <div className={trainingTitles}>
           <p>Book title</p>
@@ -44,11 +48,18 @@ export function GoingToRead({ onClick, value, onClickDelete }) {
       <div className={trainingListAndButton}>
         <ul className={trainingList}>
           {value.map((el) => (
-            <Book key={el._id} book={el} onClickDelete={onClickDelete} />
+            <Book
+              key={el._id}
+              book={el}
+              onClickDelete={onClickDelete}
+              title={title}
+            />
           ))}
-          {location && <li>{element}</li>}
+          {location && (!trainingBookList.length || !isMobile) && (
+            <li>{element}</li>
+          )}
         </ul>
-        {isMobile && !location && (
+        {isMobile && !location && title === "Going to read" && (
           <Button type={"button"} onClick={onClick} className={"mobileForm"}>
             <svg className={css.icon} width="16" height="16">
               <use href="../../../public/symbol-defs.svg#icon-cross"></use>

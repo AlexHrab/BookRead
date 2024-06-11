@@ -162,6 +162,25 @@
   cursor: pointer;
 }
 
+.ResumeButton {
+  width: 130px;
+  height: 40px;
+  flex-shrink: 0;
+  background: #6d7a8d;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
+}
+
 /* ================================================================================================ */
 @media screen and (min-width: 768px) and (max-width: 1150px) {
   .BookFormBtn {
@@ -185,5 +204,16 @@
     width: 171px;
     margin-top: 40px;
     margin-left: 0;
+  }
+
+  .StatisticFormBtn {
+    margin: 0;
+    align-self: center;
+  }
+
+  .startTraning {
+    width: 181px;
+    align-self: center;
+    margin: auto;
   }
 }
