@@ -3,9 +3,11 @@ import { NavLink } from "react-router-dom";
 import { Button } from "../Button/Button";
 import css from "./AuthForm.module.css";
 import { useMediaQuery } from "react-responsive";
+import { useState } from "react";
 
 export function AuthForm({ title, onSubmit, initialValues, validation }) {
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const [showPass, setShowPass] = useState(false);
 
   return (
     <Formik
@@ -23,35 +25,65 @@ export function AuthForm({ title, onSubmit, initialValues, validation }) {
           <Button type={"button"} title={"Google"} className={"Google"} />
         </div>
         {title === "register" && (
-          <label htmlFor="name" className={css.label}>
-            Name&nbsp;<span className={css.authFormSpan}>*</span>
+          <div className={css.labelBox}>
+            <label htmlFor="name" className={css.label}>
+              Name&nbsp;<span className={css.authFormSpan}>*</span>
+            </label>
             <Field id="name" type="text" name="name" className={css.input} />
-          </label>
+            <ErrorMessage className={css.error} name="name" component="span" />
+          </div>
         )}
-        <label htmlFor="email" className={css.label}>
-          Email&nbsp;<span className={css.authFormSpan}>*</span>
+        <div className={css.labelBox}>
+          <label htmlFor="email" className={css.label}>
+            Email&nbsp;<span className={css.authFormSpan}>*</span>
+          </label>
           <Field id="email" type="text" name="email" className={css.input} />
-        </label>
-        <label htmlFor="password" className={css.label}>
-          Password&nbsp;<span className={css.authFormSpan}>*</span>
+          <ErrorMessage className={css.error} name="email" component="span" />
+        </div>
+        <div className={css.labelBox}>
+          <label htmlFor="password" className={css.label}>
+            Password&nbsp;<span className={css.authFormSpan}>*</span>
+          </label>
           <Field
             id="password"
-            type="text"
+            type={!showPass ? "password" : "text"}
             name="password"
             className={css.input}
           />
-        </label>
+          <ErrorMessage
+            className={css.error}
+            name="password"
+            component="span"
+          />
+        </div>
         {title === "register" && (
-          <label htmlFor="confirmPassword" className={css.label}>
-            Confirm password&nbsp;<span className={css.authFormSpan}>*</span>
+          <div className={css.labelBox}>
+            <label htmlFor="confirmPassword" className={css.label}>
+              Confirm password&nbsp;<span className={css.authFormSpan}>*</span>
+            </label>
             <Field
               id="confirmPassword"
               name="confirmPassword"
-              type="text"
+              type={!showPass ? "password" : "text"}
               className={css.input}
             />
-          </label>
+            <ErrorMessage
+              className={css.error}
+              name="confirmPassword"
+              component="span"
+            />
+          </div>
         )}
+        <label className={css.checkboxContainer}>
+          Show password
+          <input
+            className={css.checkbox}
+            type="checkbox"
+            checked={showPass}
+            onChange={() => setShowPass((prev) => !prev)}
+          />
+          <span className={css.customCheckbox}></span>
+        </label>
         <Button type={"submit"} title={title} className={"authFormBtn"} />
 
         {title === "register" ? (

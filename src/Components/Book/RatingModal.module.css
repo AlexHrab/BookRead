@@ -8,6 +8,16 @@
   height: 15px;
 }
 
+.checkboxContainerRatingStars {
+  display: inline-block;
+  position: relative;
+
+  /* cursor: pointer; */
+
+  width: 15px;
+  height: 15px;
+}
+
 .checkbox {
   position: absolute;
   opacity: 0;
@@ -34,12 +44,38 @@
   fill: #ff6b08;
 }
 
+.customCheckboxRatingStars {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  stroke: #ff6b08;
+  fill: white;
+}
+
+.checkbox:checked + .customCheckboxRatingStars {
+  stroke: #ff6b08;
+  fill: #ff6b08;
+}
+
 .list {
   list-style-type: none;
   display: flex;
   gap: 12px;
   padding: 0;
   margin: 0 0 10px;
+}
+
+.listRatingStars {
+  list-style-type: none;
+  display: flex;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
 }
 
 .text {
@@ -79,4 +115,12 @@
 .btnBox {
   display: flex;
   margin-top: 10px;
+}
+
+/* ================================================================================================ */
+
+@media screen and (max-width: 767px) {
+  .listRatingStars {
+    gap: 5px;
+  }
 }

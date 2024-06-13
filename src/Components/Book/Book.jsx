@@ -12,6 +12,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Button } from "../Button/Button";
 import { RatingModal } from "./RatingModal";
+import { RatingStars } from "./RatingStars";
 
 export function Book({ book, onClickDelete, title, onClickRating }) {
   const thisLocation = useSelector(selectLocation);
@@ -26,7 +27,11 @@ export function Book({ book, onClickDelete, title, onClickRating }) {
   //   setIsChecked(book.isChecked);
   // }, [finishBook]);
 
-  const trainingItem = clsx(css.item, location && css.itemForTraining);
+  const trainingItem = clsx(
+    css.item,
+    location && css.itemForTraining,
+    title === "Already read" && css.itemAlreadyRead
+  );
   const trainingtitleAndSvg = clsx(
     css.titleAndSvg,
     location && css.trainingtitleAndSvg
@@ -61,8 +66,9 @@ export function Book({ book, onClickDelete, title, onClickRating }) {
     }
   }
 
-  const truncatedTitle = truncateText(book.title, 45);
-  const truncatedTitleRead = truncateText(book.title, 25);
+  const truncatedTitle = truncateText(book.title, 35);
+  const truncatedTitleRead = truncateText(book.title, 35);
+  const truncatedTitleNormal = truncateText(book.title, 65);
 
   return (
     <>
@@ -84,7 +90,14 @@ export function Book({ book, onClickDelete, title, onClickRating }) {
             </label>
           )}
           {(!location || (location && isMobile)) && title !== "Already read" ? (
-            <p className={trainingTitle}>{book.title}</p>
+            // <p className={trainingTitle}>{book.title}</p>
+            <LinesEllipsis
+              className={css.title}
+              text={truncatedTitleNormal}
+              ellipsis="..."
+              basedOn="words"
+              maxLine="3"
+            />
           ) : title !== "Already read" ? (
             <LinesEllipsis
               className={css.LinesEllipsis}
@@ -99,7 +112,7 @@ export function Book({ book, onClickDelete, title, onClickRating }) {
               text={truncatedTitleRead}
               ellipsis="..."
               basedOn="words"
-              maxLine="1"
+              maxLine="2"
             />
           )}
           {/* {title === "Already read" && (
@@ -136,12 +149,29 @@ export function Book({ book, onClickDelete, title, onClickRating }) {
             </svg>
           )}
           {title === "Already read" && (
-            <Button
-              type={"button"}
-              onClick={() => onClickRating(book._id)}
-              title={"Resume"}
-              className={"ResumeButton"}
-            />
+            <div className={css.resume}>
+              <div className={css.ratingBox}>
+                {isMobile && title === "Already read" && (
+                  <span className={itemTitles}>Rating:</span>
+                )}
+                <RatingStars
+                  bookRating={book.rating}
+                  className={css.RatingStars}
+                />
+              </div>
+              <Button
+                type={"button"}
+                onClick={() =>
+                  onClickRating({
+                    id: book._id,
+                    rating: book.rating,
+                    resume: book.feedback,
+                  })
+                }
+                title={"Resume"}
+                className={"ResumeButton"}
+              />
+            </div>
           )}
         </div>
       </li>

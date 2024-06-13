@@ -34,7 +34,11 @@ export function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [modalRatingIsOpen, setModalRatingIsOpen] = useState(false);
-  const [id, setId] = useState("");
+  const [ratingValue, setRatingValue] = useState({
+    id: "",
+    rating: null,
+    resume: "",
+  });
 
   useEffect(() => {
     if (userGreating) {
@@ -57,9 +61,9 @@ export function Home() {
     setModalRatingIsOpen(false);
   }
 
-  function openRating(id) {
+  function openRating(value) {
     setModalRatingIsOpen(true);
-    setId(id);
+    setRatingValue(value);
   }
 
   function content() {
@@ -160,7 +164,11 @@ export function Home() {
           )}
         </BookModal>
       )}
-      <RatingModal isOpen={modalRatingIsOpen} onClose={closeRating} id={id} />
+      <RatingModal
+        isOpen={modalRatingIsOpen}
+        onClose={closeRating}
+        ratingValue={ratingValue}
+      />
     </div>
   );
 }

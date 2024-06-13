@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import css from "./Register.module.css";
 import { Text } from "../../Components/RegisterText/Text";
 import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
 
 const SignupSchema = yup.object().shape({
   name: yup
@@ -13,24 +14,31 @@ const SignupSchema = yup.object().shape({
     .min(2, "Too Short!")
     .max(20, "Too Long!")
     .required("fild Required!"),
+  email: yup
+    .string()
+    .email("Email is not valid!")
+    .trim()
+    .min(2, "Too Short!")
+    .max(30, "Too Long!")
+    .required("fild Required!"),
   password: yup
     .string()
     .trim()
     .min(2, "Too Short!")
     .max(20, "Too Long!")
     .required("fild Required!"),
-  email: yup
+  confirmPassword: yup
     .string()
-    .email()
     .trim()
     .min(2, "Too Short!")
-    .max(30, "Too Long!")
+    .max(20, "Too Long!")
     .required("fild Required!"),
 });
 
 export function Register() {
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const navigate = useNavigate();
 
   function Submit(values, actions) {
     if (values.password === values.confirmPassword) {
@@ -40,7 +48,10 @@ export function Register() {
           email: values.email,
           password: values.password,
         })
-      );
+      )
+        .unwrap()
+        .then((res) => navigate("login"))
+        .catch((error) => alert(error.message));
       actions.resetForm();
     } else {
       alert("password is not correct");

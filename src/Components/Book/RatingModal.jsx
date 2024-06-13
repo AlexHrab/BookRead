@@ -2,25 +2,42 @@ import { BookModal } from "../Modal/Modal";
 import css from "./RatingModal.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { bookReview } from "../../Redux/Auth/operations";
-
+import { bookReview, getAllBooks } from "../../Redux/Auth/operations";
+import { selectFinishedReading } from "../../Redux/Auth/selectors";
+import { useSelector } from "react-redux";
 import { Button } from "../../Components/Button/Button";
+import { useEffect } from "react";
 
-export function RatingModal({ isOpen, onClose, id }) {
-  //   console.log(id);
+export function RatingModal({ isOpen, onClose, ratingValue }) {
+  // console.log(ratingValue.rating);
 
   const dispatch = useDispatch();
+  const finishBook = useSelector(selectFinishedReading);
 
-  const [Rating, setRating] = useState(0);
+  const [Rating, setRating] = useState(ratingValue.rating);
+  const [RatingResume, setRatingResume] = useState("");
+  console.log(ratingValue.resume);
+  console.log(RatingResume);
 
-  const handleQualityChange = (event) => {
-    const rating = parseInt(event.target.value); // Перетворення значення чекбокса у числовий тип даних
+  useEffect(() => {
+    setRatingResume(ratingValue.resume || "");
+  }, [ratingValue.resume]);
+
+  useEffect(() => {
+    setRating(ratingValue.rating);
+  }, [ratingValue.rating]);
+
+  const handleRatingChange = (event) => {
+    const rating = event.target.value;
     if (rating === Rating) {
-      // Якщо значення чекбокса співпадає з поточним рейтингом, зніміть галочку
       setRating(Rating - 1);
     } else {
       setRating(rating);
     }
+  };
+
+  const handleResumeChange = (event) => {
+    setRatingResume(event.target.value);
   };
 
   const checkboxes = [];
@@ -33,17 +50,14 @@ export function RatingModal({ isOpen, onClose, id }) {
           type="checkbox"
           value={i}
           checked={i <= Rating}
-          onChange={handleQualityChange}
+          onChange={handleRatingChange}
         />
         <svg width="20" height="20" className={css.customCheckbox}>
           <use href="../../../public/symbol-defs.svg#icon-Star-6"></use>
         </svg>
-        {/* <span className={css.customCheckbox}></span> */}
       </label>
     );
   }
-
-  console.log(checkboxes);
 
   function Submit(evt) {
     evt.preventDefault();
@@ -54,8 +68,15 @@ export function RatingModal({ isOpen, onClose, id }) {
       alert("Please enter search term!");
       return;
     }
-    dispatch(bookReview({ id: id, rating: Rating, feedback: value }));
+    dispatch(
+      bookReview({ id: ratingValue.id, rating: Rating, feedback: value })
+    )
+      .unwrap()
+      .then((res) => dispatch(getAllBooks()))
+
+      .catch((error) => alert(error.message));
     form.reset();
+    onClose();
   }
 
   return (
@@ -71,6 +92,8 @@ export function RatingModal({ isOpen, onClose, id }) {
           Resume
           <textarea
             id="text"
+            value={RatingResume}
+            onChange={handleResumeChange}
             name="text"
             type="text"
             autoComplete="off"
@@ -81,14 +104,11 @@ export function RatingModal({ isOpen, onClose, id }) {
         <div className={css.btnBox}>
           <Button
             type={"button"}
+            onClick={onClose}
             title={"Back"}
-            className={"logOutWindowBtn"}
+            className={"RatingModalBtn"}
           />
-          <Button
-            type={"submit"}
-            title={"Save"}
-            className={"logOutWindowBtn"}
-          />
+          <Button type={"submit"} title={"Save"} className={"RatingModalBtn"} />
         </div>
       </form>
     </BookModal>

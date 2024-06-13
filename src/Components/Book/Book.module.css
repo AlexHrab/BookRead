@@ -32,7 +32,7 @@
   width: 160px;
   display: flex;
   align-items: center;
-  gap: 100px;
+  /* gap: 100px; */
   justify-content: space-between;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .yearAndTotalAlreadyRead {
-  width: 150px;
+  width: 140px;
 }
 
 /* ============================================================================================== */
@@ -108,17 +108,23 @@
 }
 
 .titleForTraining {
-  text-align: left;
-  max-width: 280px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  width: 560px;
+  /* text-align: left; */
+  /* max-width: 280px; */
+  /* white-space: nowrap; */
+  /* white-space: wrap; */
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
   /* word-wrap: break-word; */
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .LinesEllipsisAlreadyRead {
-  width: 160px;
+  width: 270px;
+}
+
+.LinesEllipsis {
+  width: 250px;
 }
 
 .pagesTotal {
@@ -185,17 +191,28 @@
   border-color: #ff6b08;
 } /* Новий колір рамки */
 
+.resume {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+.title {
+  width: 560px;
+}
 /* ================================================================================================= */
 /* =========================================================================================== */
 
 @media screen and (min-width: 768px) and (max-width: 1150px) {
   .item {
-    padding: 30px;
+    box-sizing: border-box;
+    padding: 14px 20px;
   }
 
   .title {
     width: 250px;
     text-align: left;
+    overflow: hidden;
   }
 
   .titleAndSvg {
@@ -219,7 +236,9 @@
   }
 
   .LinesEllipsis {
-    width: 150px;
+    width: 200px;
+    text-overflow: ellipsis;
+    /* white-space: nowrap; */
   }
 
   .author {
@@ -240,6 +259,27 @@
   .iconDelete {
     right: 16px;
   }
+
+  .resume {
+    gap: 22px;
+  }
+
+  .yearAndTotalAndAuthorAlreadyRead {
+    width: 365px;
+  }
+
+  .yearAndTotalAlreadyRead {
+    width: 100px;
+  }
+
+  .authorAlreadyRead {
+    width: 100px;
+    left: 190px;
+  }
+
+  .LinesEllipsisAlreadyRead {
+    width: 140px;
+  }
 }
 
 /* =================================================================================================== */
@@ -249,23 +289,28 @@
     box-sizing: border-box;
     flex-direction: column;
     /* width: 280px; */
-    height: 163px;
+    height: 193px;
     align-items: center;
     justify-content: space-between;
     /* margin: 0 auto; */
-    padding: 18px 10px 18px;
+    padding: 18px 18px 40px;
     font-size: 12px;
   }
 
+  .itemAlreadyRead {
+    height: auto;
+    padding: 18px 18px 18px;
+  }
+
   .author {
-    width: 110px;
+    width: 130px;
     position: static;
     text-align: start;
   }
 
   .yearAndTotal {
     gap: 9px;
-    width: 110px;
+    width: 130px;
     display: flex;
     align-items: flex-start;
 
@@ -282,7 +327,7 @@
   }
 
   .titleAndSvg {
-    margin-bottom: auto;
+    margin-bottom: 8px;
     gap: 8px;
     align-self: flex-start;
   }
@@ -293,7 +338,7 @@
   }
 
   .title {
-    width: auto;
+    width: 220px;
     text-align: left;
   }
 
@@ -335,5 +380,28 @@
   .iconDelete {
     right: 0;
     top: 20px;
+  }
+
+  .resume {
+    display: block;
+    gap: 20px;
+    /* align-self: center; */
+    width: 200px;
+  }
+
+  .ratingBox {
+    display: flex;
+    width: 160px;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+
+  .RatingStars {
+    align-self: flex-start;
+    justify-self: flex-start;
+  }
+
+  .LinesEllipsisAlreadyRead {
+    width: 180px;
   }
 }

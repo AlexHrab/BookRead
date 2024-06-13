@@ -41,6 +41,10 @@
   box-sizing: border-box;
 }
 
+.titlesAlreadyRead {
+  padding-right: 450px;
+}
+
 /* ================================================================================================ */
 
 .yearAndTotal {
@@ -56,6 +60,11 @@
   gap: 65px;
 }
 
+.yearAndTotalAlreadyRead {
+  width: 155px;
+  gap: 30px;
+}
+
 /* ================================================================================================ */
 
 .author {
@@ -65,6 +74,11 @@
 
 .authorforTraining {
   left: 42%;
+}
+
+.authorAlreadyRead {
+  width: 150px;
+  left: 360px;
 }
 
 /* ================================================================================================== */
@@ -111,6 +125,11 @@ p {
   fill: white;
 }
 
+.rating {
+  position: absolute;
+  right: 347px;
+}
+
 /* =========================================================================================== */
 
 @media screen and (min-width: 768px) and (max-width: 1150px) {
@@ -154,6 +173,23 @@ p {
   .yearAndTotalforTraining {
     gap: 30px;
     width: 151px;
+  }
+
+  .authorAlreadyRead {
+    left: 190px;
+  }
+
+  .rating {
+    right: 195px;
+  }
+
+  .titlesAlreadyRead {
+    padding-right: 270px;
+  }
+
+  .yearAndTotalAlreadyRead {
+    width: 118px;
+    gap: 0;
   }
 }
 

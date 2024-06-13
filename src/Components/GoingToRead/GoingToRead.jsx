@@ -30,12 +30,21 @@ export function GoingToRead({
     css.listAndButton,
     location && css.listAndButtonfotTraining
   );
-  const trainingTitles = clsx(css.titles, location && css.titlesforTraining);
+  const trainingTitles = clsx(
+    css.titles,
+    location && css.titlesforTraining,
+    title === "Already read" && css.titlesAlreadyRead
+  );
   const trainingYearAndTotal = clsx(
     css.yearAndTotal,
-    location && css.yearAndTotalforTraining
+    location && css.yearAndTotalforTraining,
+    title === "Already read" && css.yearAndTotalAlreadyRead
   );
-  const trainingAuthor = clsx(css.author, location && css.authorforTraining);
+  const trainingAuthor = clsx(
+    css.author,
+    location && css.authorforTraining,
+    title === "Already read" && css.authorAlreadyRead
+  );
 
   return (
     <div>
@@ -49,6 +58,7 @@ export function GoingToRead({
             <p>Year</p>
             <p>Pages</p>
           </div>
+          {title === "Already read" && <p className={css.rating}>Rating</p>}
         </div>
       )}
       <div className={trainingListAndButton}>
