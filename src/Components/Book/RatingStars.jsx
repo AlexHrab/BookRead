@@ -19,7 +19,6 @@ export function RatingStars({ bookRating }) {
         <svg width="20" height="20" className={css.customCheckboxRatingStars}>
           <use href="../../../public/symbol-defs.svg#icon-Star-6"></use>
         </svg>
-        {/* <span className={css.customCheckbox}></span> */}
       </label>
     );
   }

@@ -20,7 +20,7 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 38px; /* 271.429% */
+  line-height: 38px;
 }
 
 .link {
@@ -34,6 +34,6 @@
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: 38px; /* 271.429% */
+  line-height: 38px;
   border: none;
 }

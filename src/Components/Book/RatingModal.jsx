@@ -7,17 +7,14 @@ import { selectFinishedReading } from "../../Redux/Auth/selectors";
 import { useSelector } from "react-redux";
 import { Button } from "../../Components/Button/Button";
 import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 export function RatingModal({ isOpen, onClose, ratingValue }) {
-  // console.log(ratingValue.rating);
-
   const dispatch = useDispatch();
   const finishBook = useSelector(selectFinishedReading);
 
   const [Rating, setRating] = useState(ratingValue.rating);
   const [RatingResume, setRatingResume] = useState("");
-  console.log(ratingValue.resume);
-  console.log(RatingResume);
 
   useEffect(() => {
     setRatingResume(ratingValue.resume || "");
@@ -64,8 +61,8 @@ export function RatingModal({ isOpen, onClose, ratingValue }) {
     const form = evt.target;
 
     const value = form.elements.text.value;
-    if (form.elements.text.value.trim() === "" && Rating === 0) {
-      alert("Please enter search term!");
+    if (form.elements.text.value.trim() === "" || Rating === 0) {
+      toast.info("Please enter resume!");
       return;
     }
     dispatch(
@@ -74,7 +71,7 @@ export function RatingModal({ isOpen, onClose, ratingValue }) {
       .unwrap()
       .then((res) => dispatch(getAllBooks()))
 
-      .catch((error) => alert(error.message));
+      .catch((error) => toast.error(error.message));
     form.reset();
     onClose();
   }

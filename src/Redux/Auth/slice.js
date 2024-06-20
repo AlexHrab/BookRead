@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { DataFunction } from "../../Pages/Training/DataFunction";
+
 import {
   register,
   login,
@@ -38,8 +40,12 @@ const initialState = {
   onlyRead: null,
   isLoading: false,
   error: null,
-
+  pagesPerDay: null,
+  durationPlan: null,
   booksLeft: [],
+  initialValue: [],
+  initialValuePlan: [],
+  showContent: false,
 };
 
 const slice = createSlice({
@@ -48,7 +54,7 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(register.fulfilled, (state, { payload }) => {
-        state.id = payload.userData.id;
+        state.userData.name = payload.name;
       })
       .addCase(login.fulfilled, (state, { payload }) => {
         state.userData.id = payload.userData.id;
@@ -58,12 +64,8 @@ const slice = createSlice({
         state.refreshToken = payload.refreshToken;
         state.isLoggedIn = true;
         state.greating = true;
-        // state.currentlyReading = payload.userData.currentlyReading;
-        // state.finishedReading = payload.userData.finishedReading;
-        // state.goingToRead = payload.userData.goingToRead;
       })
       .addCase(logout.fulfilled, (state) => {
-        // state = initialState;
         state.sid = null;
         state.accessToken = null;
         state.refreshToken = null;
@@ -79,6 +81,10 @@ const slice = createSlice({
         state.goingToRead = [];
         state.BooksPageSum = null;
         state.onlyRead = null;
+        state.pagesPerDay = null;
+        state.durationPlan = null;
+        state.initialValue = [];
+        state.initialValuePlan = [];
       })
       .addCase(getAllBooks.fulfilled, (state, { payload }) => {
         state.currentlyReading = payload.currentlyReading;
@@ -95,10 +101,15 @@ const slice = createSlice({
           }
           return { ...item1, isChecked: false };
         });
-        // console.log(List);
 
         state.trainingBookList = List;
-        // state.trainingBookList = [];
+
+        state.trainingBookList = state.trainingBookList.map((obj) => {
+          if (state.onlyRead === state.BooksPageSum) {
+            return { ...obj, isChecked: true };
+          }
+          return obj;
+        });
       })
       .addCase(getAllBooks.pending, (state) => {
         state.isLoading = true;
@@ -135,24 +146,34 @@ const slice = createSlice({
           0
         );
         state.onlyRead = totalPages;
-        if (state.onlyRead >= state.BooksPageSum) {
-          // console.log(totalPages);
-          state.stats = payload.planning.stats;
-          // state.runDate = false;
-          // state.startDate = "";
-          // state.finishDate = "";
-          // state.stats = [];
-          // state.trainingBookList = [];
-        } else {
-          state.stats = payload.planning.stats;
-        }
+        state.stats = payload.planning.stats;
+        state.durationPlan = payload.planning.duration;
+        state.perPagePlan = payload.planning.pagesPerDay;
+
+        const days = Math.ceil(
+          (DataFunction(state.finishDate).getTime() - Date.now()) /
+            (1000 * 60 * 60 * 24)
+        );
+
+        const currentlyPagesPerDay =
+          state.onlyRead / (state.durationPlan - days + 1);
+
+        state.initialValue.push(currentlyPagesPerDay);
+
+        state.initialValuePlan.push(
+          (state.BooksPageSum - state.onlyRead) / days
+        );
       })
       .addCase(getPlaning.fulfilled, (state, { payload }) => {
         state.stats = payload.planning.stats;
+        state.durationPlan = payload.planning.duration;
+        state.pagesPerDay = payload.planning.pagesPerDay;
       })
       .addCase(startTraining.fulfilled, (state, { payload }) => {
         state.stats = [];
-        // state.trainingBookList = [];
+        state.pagesPerDay = payload.pagesPerDay;
+        state.initialValue = [0];
+        state.initialValuePlan.push(state.pagesPerDay);
       });
   },
   reducers: {
@@ -160,10 +181,7 @@ const slice = createSlice({
       const bookExists = state.trainingBookList.find(
         (book) => book._id === payload
       );
-      if (
-        !bookExists
-        //  || state.trainingBookList.length === 0
-      ) {
+      if (!bookExists) {
         const book = state.goingToRead.find((book) => book._id === payload);
 
         const bookWithChecked = { ...book, isChecked: false };
@@ -199,11 +217,18 @@ const slice = createSlice({
       state.trainingBookList = [];
       state.BooksPageSum = null;
       state.onlyRead = null;
+      state.pagesPerDay = null;
+      state.durationPlan = null;
+      state.initialValue = [];
+      state.initialValuePlan = [];
     },
     setBooksLeft: (state) => {
       state.booksLeft = state.trainingBookList.filter(
         (book) => !book.isChecked
       );
+    },
+    showContent: (state, { payload }) => {
+      state.showContent = payload;
     },
   },
 });
@@ -219,4 +244,5 @@ export const {
   BooksPageSum,
   NewTraining,
   setBooksLeft,
+  showContent,
 } = slice.actions;

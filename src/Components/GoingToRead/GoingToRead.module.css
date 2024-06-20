@@ -9,10 +9,6 @@
 .listforTraining {
   box-sizing: border-box;
   display: flex;
-  /* flex-direction: column;
-  justify-content: center; */
-  /* height: 100%; */
-  /* padding: 20px 0 20px; */
 }
 
 /* =================================================================================================== */
@@ -34,7 +30,7 @@
 .titlesforTraining {
   border-top: 1px solid #e0e5eb;
   border-bottom: 1px solid #e0e5eb;
-  /* margin-bottom: 12px; */
+
   padding: 11px 161px 11px 0;
   margin-bottom: 0;
   width: 928px;
@@ -115,7 +111,6 @@ p {
   overflow-x: hidden;
 
   border-bottom: 1px solid #e0e5eb;
-  /* margin-bottom: 40px; */
 }
 
 /* ================================================================================================== */

@@ -1,26 +1,15 @@
 .Training {
-  /* box-sizing: border-box; */
   padding: 40px 16px;
-  /* display: flex;
-  flex-direction: column; */
 
   height: 100%;
 }
 
-/* .countsAndTrainingAndCalendarsAndGoals {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 40px;
-  gap: 32px;
-  width: 928px;
-} */
-
 .counts {
   display: flex;
   box-sizing: border-box;
-  /* width: 928px; */
+
   gap: 74px;
-  /* align-self: flex-start; */
+
   padding-left: 137px;
 }
 
@@ -28,8 +17,7 @@
   display: flex;
   box-sizing: border-box;
   justify-content: space-between;
-  /* gap: 32px; */
-  /* flex-grow: 0; */
+
   margin-bottom: 40px;
   position: relative;
 }
@@ -43,12 +31,6 @@
   box-sizing: border-box;
 }
 
-/* .countsAndTrainingAndCalendars {
-  display: flex;
-  flex-direction: column;
-   align-items: center; 
-}  */
-
 .statistics {
   box-sizing: border-box;
   width: 288px;
@@ -61,9 +43,10 @@
 }
 
 .Schedule {
-  /* flex-grow: 0; */
   display: flex;
-  /* box-sizing: border-box; */
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 44px 0 44px 44px;
   flex-shrink: 0;
   width: 928px;
   height: 340px;
@@ -71,10 +54,41 @@
   box-shadow: 0px 2px 3px 0px rgba(9, 30, 63, 0.1);
 }
 
+.ScheduleTitle {
+  color: var(--deep-blue, #242a37);
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.ScheduleTitleSpan {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background: #f5f7fa;
+  box-shadow: 0px 2px 3px 0px rgba(9, 30, 63, 0.1);
+  color: var(--deep-blue, #242a37);
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 38px;
+  text-transform: uppercase;
+}
+
 .statisticsAndSchedule {
   box-sizing: border-box;
   display: flex;
-  /* gap: 32px; */
+
   justify-content: space-between;
 }
 
@@ -89,8 +103,6 @@
 .goalsAndTrainingList {
   display: flex;
   box-sizing: border-box;
-  /* width: 100%; */
-  /* justify-content: space-between; */
 }
 
 .trainingAndCalendars {
@@ -102,10 +114,8 @@
 }
 
 .iconBack {
-  /* z-index: 111; */
   fill: #ff6b08;
   margin-bottom: 32px;
-  /* text-align: left; */
 }
 
 /* ======================================================================================================= */
@@ -114,14 +124,6 @@
   .Training {
     padding: 32px;
   }
-
-  /* .countsAndTrainingAndCalendarsAndGoals {
-    flex-direction: column;
-  } */
-
-  /* .countsAndTrainingAndCalendars {
-   order: 3; 
-  }  */
 
   .countsAndGoals {
     flex-direction: column;
@@ -139,7 +141,7 @@
     order: 0;
     width: 100%;
     gap: 32px;
-    /* align-self: flex-start; */
+
     padding: 0;
     justify-content: center;
     margin-bottom: 36px;

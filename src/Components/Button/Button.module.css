@@ -47,7 +47,7 @@
   font-weight: 700;
   line-height: 38px; /* 237.5% */
   border: none;
-  /* margin: 0 auto 28px; */
+
   cursor: pointer;
 }
 
@@ -162,6 +162,7 @@
   line-height: normal;
   border: none;
   cursor: pointer;
+  align-self: center;
 }
 
 .statistic {

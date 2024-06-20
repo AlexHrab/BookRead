@@ -7,7 +7,6 @@
   padding: 40px;
   width: 400px;
   margin: 0 auto;
-  /* flex-grow: 1; */
 }
 
 .labelBox {
@@ -23,12 +22,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  /* position: relative; */
 }
-
-/* label:not(:last-of-type) {
-  margin-bottom: 20px;
-} */
 
 .authFormSpan {
   color: red;
@@ -49,11 +43,9 @@
   outline: none;
   border: none;
   margin-top: 8px;
-  /* position: relative; */
 }
 
 .error {
-  /* text-transform: uppercase; */
   color: #ff6b08;
   font-family: Montserrat;
   font-size: 12px;
@@ -112,12 +104,11 @@
   width: 0;
 }
 
-/* Стиль контейнера чекбоксу */
 .checkboxContainer {
   display: inline-block;
   position: relative;
   display: flex;
-  /* width: 300px; */
+
   cursor: pointer;
   color: #898f9f;
   font-family: Montserrat;
@@ -128,7 +119,6 @@
   align-self: flex-start;
 }
 
-/* Створення кастомного чекбоксу */
 .customCheckbox {
   position: absolute;
   top: 0;
@@ -140,12 +130,11 @@
   border: 1px solid #a6abb9;
 }
 
-/* Додавання галочки при вибраному чекбоксі */
 .checkbox:checked + .customCheckbox::after {
   content: "";
   position: absolute;
   left: 30%;
-  /* top: 50%;  */
+
   transform: translate(-50%, -50%);
 
   width: 4px;
@@ -157,13 +146,17 @@
 
 .checkbox:checked + .customCheckbox {
   border-color: #ff6b08;
-} /* Новий колір рамки */
+}
 
 /* ================================================================================================== */
 @media screen and (min-width: 768px) and (max-width: 1150px) {
   .labelBox {
     display: flex;
     flex-direction: column;
+  }
+
+  .error {
+    top: 24px;
   }
 
   .authForm {

@@ -6,11 +6,16 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../Redux/Auth/operations";
 import css from "./Layout.module.css";
 import { Button } from "../Button/Button";
-import { showContent } from "../../Redux/Other/operations";
+// import { showContent } from "../../Redux/Other/operations";
+import { selectLocation, selectRunDate } from "../../Redux/Auth/selectors";
+import { useSelector } from "react-redux";
 
 export function Layout() {
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
+  const thisLocation = useSelector(selectLocation);
+  const location = thisLocation === "/training" ? true : false;
+  const RunDate = useSelector(selectRunDate);
 
   function onClose() {
     setModalOpen(false);
@@ -23,25 +28,28 @@ export function Layout() {
 
   function closeOn() {
     setModalOpen(true);
-    // dispatch(showContent(true));
   }
 
   return (
     <>
       <Navigation closeOn={closeOn} />
       <BookModal isOpen={modalOpen} onClose={onClose} className={css.modal}>
-        <p className={css.logOutWindowText}>Do you really want to log out?</p>
+        <p className={css.logOutWindowText}>
+          {!RunDate
+            ? "Do you really want to log out?"
+            : "The changes you made will be lost if you navigate away from this application"}
+        </p>
         <div className={css.buttonBox}>
           <Button
             type={"button"}
             onClick={logOut}
-            title={"Yes"}
+            title={!RunDate ? "Yes" : "Leave"}
             className={"logOutWindowBtn"}
           />
           <Button
             type={"button"}
             onClick={onClose}
-            title={"No"}
+            title={!RunDate ? "No" : "Cancel"}
             className={"logOutWindowBtn"}
           />
         </div>

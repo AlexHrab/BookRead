@@ -23,10 +23,6 @@ export function Book({ book, onClickDelete, title, onClickRating }) {
   const finishBook = useSelector(selectFinishedReading);
   const [isChecked, setIsChecked] = useState(book.isChecked);
 
-  // useEffect(() => {
-  //   setIsChecked(book.isChecked);
-  // }, [finishBook]);
-
   const trainingItem = clsx(
     css.item,
     location && css.itemForTraining,
@@ -90,7 +86,6 @@ export function Book({ book, onClickDelete, title, onClickRating }) {
             </label>
           )}
           {(!location || (location && isMobile)) && title !== "Already read" ? (
-            // <p className={trainingTitle}>{book.title}</p>
             <LinesEllipsis
               className={css.title}
               text={truncatedTitleNormal}
@@ -115,15 +110,6 @@ export function Book({ book, onClickDelete, title, onClickRating }) {
               maxLine="2"
             />
           )}
-          {/* {title === "Already read" && (
-          <LinesEllipsis
-            className={css.LinesEllipsis}
-            text={truncatedTitleRead}
-            ellipsis="..."
-            basedOn="words"
-            maxLine="1"
-          />
-        )} */}
         </div>
         <div className={trainingYearAndTotalAndAuthor}>
           {isMobile && <span className={itemTitles}>Author:</span>}

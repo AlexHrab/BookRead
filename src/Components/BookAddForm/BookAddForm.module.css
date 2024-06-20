@@ -19,6 +19,19 @@
   line-height: normal;
   margin-bottom: 0;
   order: 0;
+  position: relative;
+}
+
+.error {
+  color: #ff6b08;
+  font-family: Montserrat;
+  font-size: 12px;
+  position: absolute;
+  font-weight: 500;
+  right: 1px;
+  top: 26px;
+  width: 150px;
+  text-align: right;
 }
 
 .label:not(:last-of-type) {
@@ -90,7 +103,6 @@
 /* =============================================================================================== */
 @media screen and (max-width: 767px) {
   .BookForm {
-    /* flex-direction: column; */
     flex-wrap: wrap;
     column-gap: 32px;
     margin-bottom: 40px;

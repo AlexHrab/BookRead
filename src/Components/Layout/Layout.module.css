@@ -63,11 +63,12 @@
   text-align: center;
   color: var(--deep-blue, #242a37);
   font-family: Montserrat;
-  font-size: 28px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   margin-bottom: 60px;
+  margin-top: 40px;
 }
 
 .buttonBox {
@@ -95,5 +96,9 @@
   .buttonBox {
     flex-direction: column;
     gap: 20px;
+  }
+
+  .logOutWindowText {
+    margin-top: 0;
   }
 }

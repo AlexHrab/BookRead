@@ -22,3 +22,26 @@ html {
   height: 100%;
   background: #f6f7fb;
 }
+
+.Toastify__toast {
+  background-color: #ff6b08 !important;
+  color: white !important;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Abril Fatface" !important;
+  letter-spacing: 1.5px;
+  width: 400px;
+}
+
+.Toastify__toast-body .Toastify__toast-icon svg {
+  fill: white !important;
+}
+
+/* ================================================================================================== */
+
+@media screen and (max-width: 767px) {
+  .Toastify__toast {
+    width: 280px;
+    font-size: 16px;
+  }
+}

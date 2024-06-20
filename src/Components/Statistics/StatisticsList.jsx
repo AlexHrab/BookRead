@@ -7,7 +7,7 @@ import css from "./StatisticsList.module.css";
 export function StatisticsList() {
   const stats = useSelector(selectStats);
   const startDate = useSelector(selectUserStartDate);
-  //   const newStats = new Date(stats[3].time).getTime();
+
   const newStartDate = new Date(startDate).getTime();
 
   function getUserTime(milliseconds) {

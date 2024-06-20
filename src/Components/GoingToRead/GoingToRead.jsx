@@ -1,4 +1,3 @@
-// import { selectGoingToRead } from "../../Redux/Auth/selectors";
 import { useSelector } from "react-redux";
 import { Book } from "../Book/Book";
 import css from "./GoingToRead.module.css";
@@ -19,11 +18,9 @@ export function GoingToRead({
   const thisLocation = useSelector(selectLocation);
   const location = thisLocation === "/training" ? true : false;
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  // const GoingToRead = useSelector(selectGoingToRead);
+
   const element = DefaultElement();
   const trainingBookList = useSelector(selectTrainingBookList);
-
-  // console.log(value);
 
   const trainingList = clsx(css.list, location && css.listforTraining);
   const trainingListAndButton = clsx(

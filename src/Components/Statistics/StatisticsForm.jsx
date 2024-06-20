@@ -7,42 +7,16 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "../Button/Button";
 import { FaAngleDown } from "react-icons/fa6";
-import { selectStats } from "../../Redux/Auth/selectors";
+import { selectStats, selectSum } from "../../Redux/Auth/selectors";
 import { useSelector } from "react-redux";
-
-const SignupSchema = yup.object().shape({
-  title: yup
-    .string()
-    .trim()
-    .min(2, "Too Short!")
-    .max(40, "Too Long!")
-    .required("fild Required!"),
-  author: yup
-    .string()
-    .trim()
-    .min(2, "Too Short!")
-    .max(30, "Too Long!")
-    .required("fild Required!"),
-  publishYear: yup
-    .string()
-    .trim()
-    .min(2, "Too Short!")
-    .max(4, "Too Long!")
-    .required("fild Required!"),
-  pagesTotal: yup
-    .string()
-    .trim()
-    .min(1, "Too Short!")
-    .max(4, "Too Long!")
-    .required("fild Required!"),
-});
+import { ToastContainer, toast } from "react-toastify";
 
 export function StatisticsForm({ statisticsDate, setStatisticsDate, submit }) {
-  //   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const sum = useSelector(selectSum);
+
   const dispath = useDispatch();
   const [calendarOpen, setCalendarOpen] = useState(false);
   const stats = useSelector(selectStats);
-  // console.log(stats);
 
   let total = 0;
 
@@ -50,12 +24,16 @@ export function StatisticsForm({ statisticsDate, setStatisticsDate, submit }) {
     total += stat.pagesCount;
   }
 
-  // console.log(total);
+  const maxValue = sum - total;
 
-  // function Submit(values, actions) {
+  const SignupSchema = yup.object().shape({
+    pages: yup
+      .number()
 
-  //   actions.resetForm();
-  // }
+      .min(1, "Too Short!")
+      .max(maxValue, "Too much!")
+      .required("fild Required!"),
+  });
 
   const initialValues = {
     date: "",
@@ -66,43 +44,10 @@ export function StatisticsForm({ statisticsDate, setStatisticsDate, submit }) {
     <Formik
       onSubmit={submit}
       initialValues={initialValues}
-      // validationSchema={SignupSchema}
+      validationSchema={SignupSchema}
     >
       <Form className={css.BookForm}>
         <div className={css.labelBox}>
-          {/* <label htmlFor="date" className={css.Label}>
-            Date
-            <Field name="date" id="date">
-              {({ field }) => (
-                <div className={css.timeInputWrapper}>
-                  <DatePicker
-                    className={css.timeInput}
-                    selected={statisticsDate}
-                    onCalendarOpen={() => setCalendarOpen(true)}
-                    onCalendarClose={() => setCalendarOpen(false)}
-                    onChange={(statisticsDate) => {
-                      setStatisticsDate(statisticsDate);
-                    }}
-                    timeInputLabel="Time:"
-                    //   placeholderText={title}
-                    dateFormat="MM.dd.yyyy"
-                    showTimeInput
-                  />
-                  <FaAngleDown
-                    className={css.iconInput}
-                    style={{
-                      transform: calendarOpen
-                        ? "rotate(180deg)"
-                        : "rotate(0deg)",
-                      transition: "transform 0.2s ease-in-out",
-                      fill: calendarOpen ? "#4d4d54" : "",
-                    }}
-                  />
-                </div>
-              )}
-            </Field>
-          </label> */}
-
           <div className={css.totalPagesBoxWrapper}>
             <span className={css.totalPagesText}>Total of pages</span>
             <div className={css.totalPagesBox}>
@@ -114,11 +59,12 @@ export function StatisticsForm({ statisticsDate, setStatisticsDate, submit }) {
             Amount of pages
             <Field
               id="pages"
-              type="text"
+              type="number"
               name="pages"
               className={css.pagesInput}
               placeholder="..."
             />
+            <ErrorMessage className={css.error} name="pages" component="span" />
           </label>
         </div>
         <Button type={"submit"} title={"Add result"} className={"statistic"} />

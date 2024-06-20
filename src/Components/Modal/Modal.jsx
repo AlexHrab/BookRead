@@ -6,17 +6,10 @@ import { VscChromeClose } from "react-icons/vsc";
 export function BookModal({ isOpen, onClose, children }) {
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  // const modalStyle = {
-  //   overlay: {
-  //     backgroundColor: "transparent",
-  //   },
-  // };
-
   return (
     <div>
       <Modal
         overlayClassName={css.modalOverlay}
-        // style={modalStyle}
         isOpen={isOpen}
         className={css.modal}
         onRequestClose={onClose}

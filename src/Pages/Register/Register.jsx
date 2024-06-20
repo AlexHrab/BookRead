@@ -6,6 +6,9 @@ import css from "./Register.module.css";
 import { Text } from "../../Components/RegisterText/Text";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import { selectUserName } from "../../Redux/Auth/selectors";
+import { useSelector } from "react-redux";
 
 const SignupSchema = yup.object().shape({
   name: yup
@@ -39,6 +42,7 @@ export function Register() {
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const navigate = useNavigate();
+  const Name = useSelector(selectUserName);
 
   function Submit(values, actions) {
     if (values.password === values.confirmPassword) {
@@ -50,11 +54,16 @@ export function Register() {
         })
       )
         .unwrap()
-        .then((res) => navigate("login"))
-        .catch((error) => alert(error.message));
+        .then((res) => navigate("/"))
+        .then((res) =>
+          toast.info(
+            `Congratulations ${Name}, you are successfully registered, please log in!`
+          )
+        )
+        .catch((error) => toast.error(error.message));
       actions.resetForm();
     } else {
-      alert("password is not correct");
+      toast.info("password is not correct");
     }
   }
 
@@ -69,7 +78,7 @@ export function Register() {
     <div className={css.box}>
       <div className={css.form}>
         <AuthForm
-          title={"register"}
+          title={"Register"}
           onSubmit={Submit}
           initialValues={initialValues}
           validation={SignupSchema}

@@ -16,15 +16,15 @@ export function AuthForm({ title, onSubmit, initialValues, validation }) {
       validationSchema={validation}
     >
       <Form className={css.authForm}>
-        <div className={css.authFormGoogleContainer}>
+        {/* <div className={css.authFormGoogleContainer}>
           <img
             src="../../../public/google icon.png"
             alt="google"
             className={css.authFormGoogleIcon}
           />
           <Button type={"button"} title={"Google"} className={"Google"} />
-        </div>
-        {title === "register" && (
+        </div> */}
+        {title === "Register" && (
           <div className={css.labelBox}>
             <label htmlFor="name" className={css.label}>
               Name&nbsp;<span className={css.authFormSpan}>*</span>
@@ -56,7 +56,7 @@ export function AuthForm({ title, onSubmit, initialValues, validation }) {
             component="span"
           />
         </div>
-        {title === "register" && (
+        {title === "Register" && (
           <div className={css.labelBox}>
             <label htmlFor="confirmPassword" className={css.label}>
               Confirm password&nbsp;<span className={css.authFormSpan}>*</span>
@@ -86,7 +86,7 @@ export function AuthForm({ title, onSubmit, initialValues, validation }) {
         </label>
         <Button type={"submit"} title={title} className={"authFormBtn"} />
 
-        {title === "register" ? (
+        {title === "Register" ? (
           <span className={css.authFormRegisterText}>
             Already have an account?&nbsp;
             <NavLink to="/login" className={css.authFormLink}>

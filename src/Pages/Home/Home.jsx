@@ -1,7 +1,7 @@
 import { BookForm } from "../../Components/BookAddForm/BookAddForm";
 import css from "./Home.module.css";
 import { useSelector } from "react-redux";
-
+import { Loader } from "../../Components/Loader/Loader";
 import { GoingToRead } from "../../Components/GoingToRead/GoingToRead";
 import { useMediaQuery } from "react-responsive";
 import { Button } from "../../Components/Button/Button";
@@ -9,17 +9,19 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { greating } from "../../Redux/Auth/operations";
 import { useEffect } from "react";
-// import { useSelector } from "react-redux";
+
 import {
   selectGreating,
   selectAccessToken,
   selectGoingToRead,
   selectCurrentlyReading,
   selectFinishedReading,
+  selectIsLoading,
 } from "../../Redux/Auth/selectors";
 import { BookModal } from "../../Components/Modal/Modal";
 import { getAllBooks } from "../../Redux/Auth/operations";
 import { RatingModal } from "../../Components/Book/RatingModal";
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -28,8 +30,10 @@ export function Home() {
   const userGreating = useSelector(selectGreating);
   const currentlyReading = useSelector(selectCurrentlyReading);
   const finishedReading = useSelector(selectFinishedReading);
-  // const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isLoading = useSelector(selectIsLoading);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [showContent, setShowContent] = useState(false);
@@ -45,12 +49,6 @@ export function Home() {
       setModalIsOpen(true);
     }
   }, [userGreating, modalIsOpen]);
-
-  // useEffect(() => {
-  //   if (accessToken) {
-  //     dispatch(getAllBooks());
-  //   }
-  // }, [dispatch, accessToken]);
 
   function close() {
     setModalIsOpen(false);
@@ -74,6 +72,10 @@ export function Home() {
     setShowContent(false);
     setModalIsOpen(false);
     dispatch(greating(false));
+  }
+
+  function handleClick() {
+    navigate("/training");
   }
 
   return (
@@ -113,9 +115,19 @@ export function Home() {
               title={"Going to read"}
             />
           )}
+          {goingToRead.length !== 0 &&
+            currentlyReading.length === 0 &&
+            finishedReading.length === 0 && (
+              <Button
+                type={"button"}
+                onClick={handleClick}
+                title={"My training"}
+                className={"startTraning"}
+              />
+            )}
         </div>
       )}
-
+      {isLoading && <Loader />}
       {userGreating && (
         <BookModal isOpen={modalIsOpen} onClose={close}>
           <ul className={css.list}>

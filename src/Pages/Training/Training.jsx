@@ -9,10 +9,8 @@ import { useEffect } from "react";
 import { ConvertMs } from "../../Components/Convert/Convert";
 import { Menu } from "./Menu";
 import { useMediaQuery } from "react-responsive";
-// import { runDate } from "../../Redux/Auth/slice";
-// import { selectRunDate } from "../../Redux/Auth/selectors";
+
 import { useDispatch, useSelector } from "react-redux";
-// import { useSelector } from "react-redux";
 
 import { SelectBook } from "../../Components/SelectBook/SelectBook";
 import {
@@ -25,6 +23,10 @@ import {
   selectAccessToken,
   selectFinishedReading,
   selectOnlyRead,
+  selectDurationPlan,
+  selectPagesPerDay,
+  selectInitialValue,
+  selectInitialValuePlan,
 } from "../../Redux/Auth/selectors";
 
 import {
@@ -46,6 +48,11 @@ import {
 } from "../../Redux/Auth/operations";
 import { Button } from "../../Components/Button/Button";
 import { ModalTime, ModalGoal, ModalBookRead } from "./Modals";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+
+import { Schedule } from "./Schedule";
 
 export function Training() {
   const dispatch = useDispatch();
@@ -57,13 +64,16 @@ export function Training() {
   const currentDate = Date.now();
   const currentlyReading = useSelector(selectCurrentlyReading);
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  // const isCurrentlyReading = currentlyReading.length !== 0 ? true : false;
-  // const accessToken = useSelector(selectAccessToken);
+
   const finishBook = useSelector(selectFinishedReading);
   const pageSum = useSelector(selectSum);
-  const onlyRead = useSelector(selectOnlyRead);
-  console.log(finishBook);
-  // console.log(finishDate.getTime());
+  const onlyRead = useSelector(selectOnlyRead) || 0;
+  const DurationPlan = useSelector(selectDurationPlan);
+  const PagesPerDay = useSelector(selectPagesPerDay);
+  const days = userRunDate
+    ? Math.ceil((finishDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+    : 0;
+  const currentlyPagesPerDay = onlyRead / (DurationPlan - days + 1);
 
   const [goalsCount, setGoalsCount] = useState({});
   const [yearCount, setYearCount] = useState({});
@@ -99,47 +109,50 @@ export function Training() {
   }
 
   function setStartDate(date) {
-    const startDateValue = date ? date.toString() : ""; // Перевіряємо, чи дата не порожня
+    const startDateValue = date ? date.toString() : "";
     dispatch(userStartDate(startDateValue));
   }
 
   function setFinishDate(date) {
-    const finishDateValue = date ? date.toString() : ""; // Перевіряємо, чи дата не порожня
+    const finishDateValue = date ? date.toString() : "";
     dispatch(userFinishDate(finishDateValue));
   }
 
-  const days = userRunDate
-    ? Math.floor(
-        (new Date(finishDate).getTime() - startDate.getTime()) /
-          (1000 * 60 * 60 * 24)
-      )
-    : "0";
-
   function onClick() {
-    if (
-      startDate !== undefined &&
-      finishDate !== undefined &&
-      startDate.getTime() > Date.now()
-    ) {
-      dispatch(runDate(true));
-      // console.log("hello");
-      dispatch(
-        startTraining({
-          startDate: formatDate(startDate),
-          endDate: formatDate(finishDate),
-          books: booksId,
-        })
-      )
-        .unwrap()
-        .then((res) => dispatch(getAllBooks()))
-        .catch((error) => alert(error.message), dispatch(getAllBooks()));
-      dispatch(BooksPageSum());
-      dispatch(setBooksLeft());
-      // setShowMenu(false);
+    if (startDate !== "" && finishDate !== "") {
+      if (
+        new Date(formatDate(startDate)).getTime() !==
+        new Date(formatDate(finishDate)).getTime()
+      ) {
+        if (startDate.getTime() > Date.now()) {
+          dispatch(runDate(true));
+
+          dispatch(
+            startTraining({
+              startDate: formatDate(startDate),
+              endDate: formatDate(finishDate),
+              books: booksId,
+            })
+          )
+            .unwrap()
+            .then((res) => dispatch(getAllBooks()))
+            .then((res) => dispatch(getPlaning()))
+            .catch(
+              (error) => toast.error(error.message),
+              dispatch(getAllBooks())
+            );
+          dispatch(BooksPageSum());
+          dispatch(setBooksLeft());
+        } else {
+          toast.info("Training start date should not be in the past!");
+        }
+      } else {
+        toast.info(
+          "The start time should not be equal to the end time of the training!"
+        );
+      }
     } else {
-      alert(
-        "поля повинні бути заповнені і дата початку тренування не повинна бути в минулому"
-      );
+      toast.info("Select the start and end date!");
     }
   }
 
@@ -171,22 +184,14 @@ export function Training() {
     }
   }, [stopGoalsInterval, userRunDate, books, finishBook]);
 
-  // console.log(finishBook.length + books.length - finishBook.length);
-  // console.log(finishBook.length);
-  // console.log(finishBookLenthMemo);
-  // console.log(onlyRead);
-  // console.log(modalGoalIsOpen);
-
   useEffect(() => {
     if (
       stopGoalsInterval &&
       stopYearInterval &&
       onlyRead >= pageSum &&
-      // currentlyReading.length === 0 &&
       userRunDate
     ) {
       setModalGoalIsOpen(true);
-      // setModalTimeIsOpen(false);
     }
   }, [stopGoalsInterval, stopYearInterval, books, finishBook, userRunDate]);
 
@@ -210,7 +215,6 @@ export function Training() {
         }
         if (onlyRead >= pageSum) {
           setStopGoalsInterval(true);
-          // clearInterval(intervalGoalsId);
         }
       }, 1000);
       return () => clearInterval(intervalGoalsId);
@@ -232,7 +236,6 @@ export function Training() {
 
         if (diff < 1000 || !userRunDate) {
           setStopYearInterval(true);
-          // clearInterval(intervalYearId);
         }
         if (onlyRead >= pageSum) {
           setStopYearInterval(true);
@@ -242,11 +245,8 @@ export function Training() {
     }
   }, [userRunDate, currentDate]);
 
-  // console.log(userRunDate);
-
   useEffect(() => {
     if (userRunDate) {
-      // dispatch(getPlaning());
       dispatch(BooksPageSum());
     }
   }, [dispatch, userRunDate]);
@@ -259,16 +259,14 @@ export function Training() {
         .unwrap()
         .then((res) => dispatch(getAllBooks()))
         .then((res) => dispatch(setBooksLeft()))
-        .catch((error) => alert(error.message));
-      // dispatch(setBooksLeft());
+        .catch((error) => toast.error(error.message));
     } else {
+      toast.info("Training hasn't started yet!");
       actions.resetForm();
     }
 
     actions.resetForm();
   }
-
-  // console.log(books);
 
   // ================================================================================================
 
@@ -317,6 +315,13 @@ export function Training() {
       {(!showMenu || !isMobile) && (
         <div className={css.statisticsAndSchedule}>
           <div className={css.Schedule}>
+            <p className={css.ScheduleTitle}>
+              AMONT OF PAGES / DAY&nbsp;
+              <span className={css.ScheduleTitleSpan}>
+                {currentlyPagesPerDay}
+              </span>
+            </p>
+            <Schedule />
             {isMobile && !userRunDate && (
               <Button
                 type={"button"}
@@ -332,11 +337,7 @@ export function Training() {
 
           {(userRunDate || !isMobile) && (
             <div className={css.statistics}>
-              <Statistics
-                // statisticsDate={statisticsDate}
-                // setStatisticsDate={setStatisticsDate}
-                submit={statisticsSubmit}
-              />
+              <Statistics submit={statisticsSubmit} />
             </div>
           )}
         </div>

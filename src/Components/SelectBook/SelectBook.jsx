@@ -2,10 +2,15 @@ import css from "./SelectBook.module.css";
 import Select from "react-select";
 import "./SelectBook.css";
 import { useState } from "react";
-import { selectGoingToRead } from "../../Redux/Auth/selectors";
+import {
+  selectGoingToRead,
+  selectTrainingBookList,
+} from "../../Redux/Auth/selectors";
 import { useSelector } from "react-redux";
 import { Button } from "../Button/Button";
+import { ToastContainer, toast } from "react-toastify";
 
+import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 
 import { trainingBookList, trainingItemDelete } from "../../Redux/Auth/slice";
@@ -16,6 +21,8 @@ export function SelectBook() {
   const [selectedBook, setSelectedBook] = useState();
 
   const books = useSelector(selectGoingToRead);
+  const trainingList = useSelector(selectTrainingBookList);
+  const Book = trainingList.find((el) => el._id === selectedBook?.value);
 
   const firstOption = { value: "", label: "" };
   const options = [
@@ -24,10 +31,14 @@ export function SelectBook() {
   ];
 
   function onClick() {
-    if (selectedBook.value) {
+    if (selectedBook?.value) {
       dispatch(trainingBookList(selectedBook?.value));
-    } else {
-      return;
+    }
+    if (!selectedBook?.value) {
+      toast.info("Select a book first!");
+    }
+    if (Book) {
+      toast.info("The book has already been added!");
     }
   }
 

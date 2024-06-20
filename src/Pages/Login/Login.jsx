@@ -22,7 +22,6 @@ const SignupSchema = yup.object().shape({
 
 export function Login() {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
   function Submit(values, actions) {
     dispatch(login(values));
@@ -38,7 +37,7 @@ export function Login() {
     <div className={css.box}>
       <div className={css.form}>
         <AuthForm
-          title={"login"}
+          title={"Login"}
           onSubmit={Submit}
           initialValues={initialValues}
           validation={SignupSchema}

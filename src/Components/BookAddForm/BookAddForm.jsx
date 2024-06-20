@@ -6,13 +6,14 @@ import { useMediaQuery } from "react-responsive";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
 import { addBook } from "../../Redux/Auth/operations";
+import { ToastContainer, toast } from "react-toastify";
 
 const SignupSchema = yup.object().shape({
   title: yup
     .string()
     .trim()
     .min(2, "Too Short!")
-    .max(40, "Too Long!")
+    .max(80, "Too Long!")
     .required("fild Required!"),
   author: yup
     .string()
@@ -36,11 +37,18 @@ const SignupSchema = yup.object().shape({
 
 export function BookForm() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   function Submit(values, actions) {
-    dispath(addBook(values));
-    actions.resetForm();
+    dispatch(addBook(values))
+      .unwrap()
+      .then((res) => {
+        toast.info("Book successfully added");
+        actions.resetForm();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   }
 
   const initialValues = {
@@ -54,7 +62,7 @@ export function BookForm() {
     <Formik
       onSubmit={Submit}
       initialValues={initialValues}
-      // validationSchema={SignupSchema}
+      validationSchema={SignupSchema}
     >
       <Form className={css.BookForm}>
         <div className={css.labelBox}>
@@ -67,6 +75,7 @@ export function BookForm() {
               className={css.input}
               placeholder="..."
             />
+            <ErrorMessage className={css.error} name="title" component="span" />
           </label>
 
           <label htmlFor="author" className={css.label}>
@@ -77,6 +86,11 @@ export function BookForm() {
               name="author"
               className={css.input}
               placeholder="..."
+            />
+            <ErrorMessage
+              className={css.error}
+              name="author"
+              component="span"
             />
           </label>
 
@@ -89,6 +103,11 @@ export function BookForm() {
               className={css.input}
               placeholder="..."
             />
+            <ErrorMessage
+              className={css.error}
+              name="publishYear"
+              component="span"
+            />
           </label>
 
           <label htmlFor="pagesTotal" className={css.label}>
@@ -99,6 +118,11 @@ export function BookForm() {
               type="text"
               className={css.input}
               placeholder="..."
+            />
+            <ErrorMessage
+              className={css.error}
+              name="pagesTotal"
+              component="span"
             />
           </label>
         </div>
