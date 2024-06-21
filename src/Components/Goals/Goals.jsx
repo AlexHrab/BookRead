@@ -15,6 +15,8 @@ export function Goals({ days }) {
   const booksLeft = useSelector(selectBooksLeft);
   const books = useSelector(selectTrainingBookList);
 
+  // console.log(booksLeft);
+
   const value = clsx(css.value, !userRunDate && css.value_runDate);
   const specialValue = clsx(value, css.value_special);
   const description = clsx(

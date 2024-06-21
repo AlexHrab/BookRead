@@ -31,14 +31,16 @@
 
 .input__menu-list {
   height: 157px;
-  overflow: hidden;
+  overflow-x: hidden;
   width: 715px;
 }
 
 .input__menu {
   border-radius: 0 !important;
   height: 157px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+
   width: 715px;
   color: #898f9f !important;
   font-family: Montserrat !important;
@@ -75,13 +77,22 @@
 
 /* ======================================================================================================= */
 
-@media screen and (min-width: 768px) and (max-width: 1150px) {
+@media screen and (min-width: 768px) and (max-width: 1260px) {
   .input__control {
+    width: 483px;
+  }
+
+  .input__menu-list {
+    height: 157px;
+    overflow-x: hidden;
     width: 483px;
   }
 
   .input__menu {
     width: 483px;
+    height: 157px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 
@@ -92,7 +103,15 @@
     width: 280px;
   }
 
+  .input__menu-list {
+    height: 157px;
+    overflow-x: hidden;
+    width: 280px;
+  }
+
   .input__menu {
     width: 280px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }

@@ -46,6 +46,8 @@ const initialState = {
   initialValue: [],
   initialValuePlan: [],
   showContent: false,
+  GoalsInterval: false,
+  YearInterval: false,
 };
 
 const slice = createSlice({
@@ -85,6 +87,8 @@ const slice = createSlice({
         state.durationPlan = null;
         state.initialValue = [];
         state.initialValuePlan = [];
+        state.GoalsInterval = false;
+        state.YearInterval = false;
       })
       .addCase(getAllBooks.fulfilled, (state, { payload }) => {
         state.currentlyReading = payload.currentlyReading;
@@ -221,6 +225,8 @@ const slice = createSlice({
       state.durationPlan = null;
       state.initialValue = [];
       state.initialValuePlan = [];
+      state.GoalsInterval = false;
+      state.YearInterval = false;
     },
     setBooksLeft: (state) => {
       state.booksLeft = state.trainingBookList.filter(
@@ -229,6 +235,12 @@ const slice = createSlice({
     },
     showContent: (state, { payload }) => {
       state.showContent = payload;
+    },
+    GoalsInterval: (state, { payload }) => {
+      state.GoalsInterval = payload;
+    },
+    YearInterval: (state, { payload }) => {
+      state.YearInterval = payload;
     },
   },
 });
@@ -245,4 +257,6 @@ export const {
   NewTraining,
   setBooksLeft,
   showContent,
+  GoalsInterval,
+  YearInterval,
 } = slice.actions;

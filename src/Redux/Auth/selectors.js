@@ -26,3 +26,5 @@ export const selectInitialValuePlan = (state) => state.auth.initialValuePlan;
 export const selectShowContent = (state) => state.auth.showContent;
 
 export const selectIsLoading = (state) => state.auth.isLoading;
+export const selectGoalsInterval = (state) => state.auth.GoalsInterval;
+export const selectYearInterval = (state) => state.auth.YearInterval;

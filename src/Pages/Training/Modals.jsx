@@ -4,12 +4,18 @@ import { NewTraining } from "../../Redux/Auth/slice";
 import { useDispatch } from "react-redux";
 import css from "./Modals.module.css";
 
-export function ModalTime({ isOpen, onClose, setModalTimeIsOpen }) {
+export function ModalTime({
+  isOpen,
+  onClose,
+  setModalTimeIsOpen,
+  setStopGoalsInterval,
+}) {
   const dispatch = useDispatch();
 
   function newTraining() {
     dispatch(NewTraining());
     setModalTimeIsOpen(false);
+    // setStopGoalsInterval(false);
   }
 
   return (
@@ -40,12 +46,18 @@ export function ModalTime({ isOpen, onClose, setModalTimeIsOpen }) {
   );
 }
 
-export function ModalGoal({ isOpen, onClose, setModalGoalIsOpen }) {
+export function ModalGoal({
+  isOpen,
+  onClose,
+  setModalGoalIsOpen,
+  setStopGoalsInterval,
+}) {
   const dispatch = useDispatch();
 
   function newTraining() {
     dispatch(NewTraining());
     setModalGoalIsOpen(false);
+    // setStopGoalsInterval(false);
   }
 
   return (

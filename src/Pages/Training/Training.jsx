@@ -1,6 +1,6 @@
 import css from "./Training.module.css";
-import { MyTraining } from "../../Components/MyTraining/MyTraining";
-import { Calendar } from "../../Components/Calendar/Calendar";
+// import { MyTraining } from "../../Components/MyTraining/MyTraining";
+// import { Calendar } from "../../Components/Calendar/Calendar";
 import { CountDisplays } from "../../Components/CountDisplays/CountDisplays";
 import { Goals } from "../../Components/Goals/Goals";
 import { TrainingList } from "../../Components/TrainingList/TrainingList";
@@ -12,21 +12,23 @@ import { useMediaQuery } from "react-responsive";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { SelectBook } from "../../Components/SelectBook/SelectBook";
+// import { SelectBook } from "../../Components/SelectBook/SelectBook";
 import {
   selectTrainingBookList,
   selectRunDate,
   selectUserFinishDate,
   selectUserStartDate,
-  selectCurrentlyReading,
+  // selectCurrentlyReading,
   selectSum,
-  selectAccessToken,
+  // selectAccessToken,
   selectFinishedReading,
   selectOnlyRead,
   selectDurationPlan,
-  selectPagesPerDay,
-  selectInitialValue,
-  selectInitialValuePlan,
+  // selectPagesPerDay,
+  // selectInitialValue,
+  // selectInitialValuePlan,
+  selectGoalsInterval,
+  selectYearInterval,
 } from "../../Redux/Auth/selectors";
 
 import {
@@ -35,6 +37,8 @@ import {
   runDate,
   BooksPageSum,
   setBooksLeft,
+  GoalsInterval,
+  YearInterval,
 } from "../../Redux/Auth/slice";
 import { DataFunction, formatDate } from "./DataFunction";
 import { Statistics } from "../../Components/Statistics/Statistics";
@@ -42,8 +46,8 @@ import {
   startTraining,
   sendPages,
   getPlaning,
-  deleteBook,
-  refresh,
+  // deleteBook,
+  // refresh,
   getAllBooks,
 } from "../../Redux/Auth/operations";
 import { Button } from "../../Components/Button/Button";
@@ -57,19 +61,20 @@ import { Schedule } from "./Schedule";
 export function Training() {
   const dispatch = useDispatch();
   const userRunDate = useSelector(selectRunDate);
-  const defaultFinishDate = useSelector(selectUserFinishDate);
+  // const defaultFinishDate = useSelector(selectUserFinishDate);
   const startDate = DataFunction(useSelector(selectUserStartDate));
   const finishDate = DataFunction(useSelector(selectUserFinishDate));
   const books = useSelector(selectTrainingBookList);
   const currentDate = Date.now();
-  const currentlyReading = useSelector(selectCurrentlyReading);
+  // const currentlyReading = useSelector(selectCurrentlyReading);
   const isMobile = useMediaQuery({ maxWidth: 767 });
-
+  const stopGoalsInterval = useSelector(selectGoalsInterval);
+  const stopYearInterval = useSelector(selectYearInterval);
   const finishBook = useSelector(selectFinishedReading);
   const pageSum = useSelector(selectSum);
   const onlyRead = useSelector(selectOnlyRead) || 0;
   const DurationPlan = useSelector(selectDurationPlan);
-  const PagesPerDay = useSelector(selectPagesPerDay);
+  // const PagesPerDay = useSelector(selectPagesPerDay);
   const days = userRunDate
     ? Math.ceil((finishDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
     : 0;
@@ -78,13 +83,13 @@ export function Training() {
   const [goalsCount, setGoalsCount] = useState({});
   const [yearCount, setYearCount] = useState({});
   const [showMenu, setShowMenu] = useState(false);
-  const [stopGoalsInterval, setStopGoalsInterval] = useState(false);
-  const [stopYearInterval, setStopYearInterval] = useState(false);
+  // const [stopGoalsInterval, setStopGoalsInterval] = useState(false);
+  // const [stopYearInterval, setStopYearInterval] = useState(false);
   const [modalTimeIsOpen, setModalTimeIsOpen] = useState(false);
   const [modalGoalIsOpen, setModalGoalIsOpen] = useState(false);
   const [modalBookReadOpen, setModalBookReadOpen] = useState(false);
   const [finishBookLenth, setFinishBookLenth] = useState(finishBook.length);
-  const [finishBookLenthMemo] = useState(finishBook.length);
+  // const [finishBookLenthMemo] = useState(finishBook.length);
 
   function closeTime() {
     setModalTimeIsOpen(false);
@@ -141,8 +146,10 @@ export function Training() {
               (error) => toast.error(error.message),
               dispatch(getAllBooks())
             );
+          // console.log("1");
           dispatch(BooksPageSum());
           dispatch(setBooksLeft());
+          // console.log("2");
         } else {
           toast.info("Training start date should not be in the past!");
         }
@@ -173,6 +180,9 @@ export function Training() {
     setFinishBookLenth(finishBook.length);
   }, [finishBook]);
 
+  // console.log(yearCount);
+  // console.log(stopYearInterval);
+
   useEffect(() => {
     if (
       onlyRead < pageSum &&
@@ -193,6 +203,7 @@ export function Training() {
     ) {
       setModalGoalIsOpen(true);
     }
+    setFinishBookLenth(finishBook.length);
   }, [stopGoalsInterval, stopYearInterval, books, finishBook, userRunDate]);
 
   useEffect(() => {
@@ -201,7 +212,7 @@ export function Training() {
         if (stopGoalsInterval) {
           return;
         }
-
+        // clearInterval(intervalGoalsId);
         const currentDate = Date.now();
 
         const futureDate = new Date(finishDate).getTime();
@@ -211,10 +222,18 @@ export function Training() {
           setGoalsCount(ConvertMs(diff));
         }
         if (diff < 1000 || !userRunDate) {
-          setStopGoalsInterval(true);
+          dispatch(GoalsInterval(true));
+          // setGoalsCount({
+          //   days: "00",
+          //   hours: "00",
+          //   minutes: "00",
+          //   seconds: "00",
+          // });
         }
         if (onlyRead >= pageSum) {
-          setStopGoalsInterval(true);
+          dispatch(GoalsInterval(true));
+
+          setGoalsCount({});
         }
       }, 1000);
       return () => clearInterval(intervalGoalsId);
@@ -235,10 +254,17 @@ export function Training() {
         setYearCount(ConvertMs(diff));
 
         if (diff < 1000 || !userRunDate) {
-          setStopYearInterval(true);
+          dispatch(YearInterval(true));
+          // setYearCount({
+          //   days: "000",
+          //   hours: "00",
+          //   minutes: "00",
+          //   seconds: "00",
+          // });
         }
         if (onlyRead >= pageSum) {
-          setStopYearInterval(true);
+          dispatch(YearInterval(true));
+          setYearCount({});
         }
       }, 1000);
       return () => clearInterval(intervalYearId);
@@ -318,7 +344,7 @@ export function Training() {
             <p className={css.ScheduleTitle}>
               AMONT OF PAGES / DAY&nbsp;
               <span className={css.ScheduleTitleSpan}>
-                {currentlyPagesPerDay}
+                {currentlyPagesPerDay || 0}
               </span>
             </p>
             <Schedule />
@@ -346,11 +372,13 @@ export function Training() {
         isOpen={modalTimeIsOpen}
         onClose={closeTime}
         setModalTimeIsOpen={setModalTimeIsOpen}
+        // setStopGoalsInterval={setStopGoalsInterval}
       />
       <ModalGoal
         isOpen={modalGoalIsOpen}
         onClose={closeGoal}
         setModalGoalIsOpen={setModalGoalIsOpen}
+        // setStopGoalsInterval={setStopGoalsInterval}
       />
       <ModalBookRead
         isOpen={modalBookReadOpen}
