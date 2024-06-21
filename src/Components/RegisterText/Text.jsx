@@ -9,7 +9,7 @@ export function Text() {
         <ul className={css.textList}>
           <li className={css.textListItem}>
             <svg className={css.icon} width="4" height="8">
-              <use href="../../../public/symbol-defs.svg#icon-Vector1" />
+              <use href="/symbol-defs.svg#icon-Vector1" />
             </svg>
             <p className={css.textListItemText}>
               Create your goal faster and proceed to read
@@ -17,7 +17,7 @@ export function Text() {
           </li>
           <li className={css.textListItem}>
             <svg className={css.icon} width="4" height="8">
-              <use href="../../../public/symbol-defs.svg#icon-Vector1" />
+              <use href="/symbol-defs.svg#icon-Vector1" />
             </svg>
             <p className={css.textListItemText}>
               Divide process proportionally for each day
@@ -25,7 +25,7 @@ export function Text() {
           </li>
           <li className={css.textListItem}>
             <svg className={css.icon} width="4" height="8">
-              <use href="../../../public/symbol-defs.svg#icon-Vector1" />
+              <use href="/symbol-defs.svg#icon-Vector1" />
             </svg>
             <p className={css.textListItemText}>Track your success</p>
           </li>
@@ -36,7 +36,7 @@ export function Text() {
         <ul className={css.textList}>
           <li className={css.textListItem}>
             <svg className={css.icon} width="4" height="8">
-              <use href="../../../public/symbol-defs.svg#icon-Vector1" />
+              <use href="/symbol-defs.svg#icon-Vector1" />
             </svg>
             <p className={css.textListItemText}>
               Pose your own independent point of view
@@ -44,7 +44,7 @@ export function Text() {
           </li>
           <li className={css.textListItem}>
             <svg className={css.icon} width="4" height="8">
-              <use href="../../../public/symbol-defs.svg#icon-Vector1" />
+              <use href="/symbol-defs.svg#icon-Vector1" />
             </svg>
             <p className={css.textListItemText}>
               Improve your professional skills according to new knowledge
@@ -52,7 +52,7 @@ export function Text() {
           </li>
           <li className={css.textListItem}>
             <svg className={css.icon} width="4" height="8">
-              <use href="../../../public/symbol-defs.svg#icon-Vector1" />
+              <use href="/symbol-defs.svg#icon-Vector1" />
             </svg>
             <p className={css.textListItemText}>
               Become an interesting interlocutor

@@ -305,7 +305,7 @@ export function Training() {
           height="12"
           onClick={backClick}
         >
-          <use href="../../../public/symbol-defs.svg#icon-back"></use>
+          <use href="/symbol-defs.svg#icon-back"></use>
         </svg>
       )}
       <div className={css.countsAndGoals}>
@@ -355,7 +355,7 @@ export function Training() {
                 className={"mobileForm"}
               >
                 <svg className={css.iconBtn} width="16" height="16">
-                  <use href="../../../public/symbol-defs.svg#icon-cross"></use>
+                  <use href="/symbol-defs.svg#icon-cross"></use>
                 </svg>
               </Button>
             )}

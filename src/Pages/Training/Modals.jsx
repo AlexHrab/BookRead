@@ -22,7 +22,7 @@ export function ModalTime({
     <BookModal isOpen={isOpen} onClose={onClose}>
       <div className={css.BookModalTime}>
         <svg width="54px" height="54px" className={css.BookModalTimeSvg}>
-          <use href="../../../public/symbol-defs.svg#icon-thumb_up-24px-1"></use>
+          <use href="/symbol-defs.svg#icon-thumb_up-24px-1"></use>
         </svg>
         <p className={css.BookModalTimeText}>
           Well done! but you need to be a little bit faster. You can do it)
@@ -64,7 +64,7 @@ export function ModalGoal({
     <BookModal isOpen={isOpen} onClose={onClose}>
       <div className={css.BookModalGoal}>
         <svg width="54px" height="54px" className={css.BookModalGoalSvg}>
-          <use href="../../../public/symbol-defs.svg#icon-thumb_up-24px-1"></use>
+          <use href="/symbol-defs.svg#icon-thumb_up-24px-1"></use>
         </svg>
         <p className={css.BookModalGoalText}>
           Well done, congratulations! Good job!
@@ -89,7 +89,7 @@ export function ModalBookRead({ isOpen, onClose, setModalBookReadOpen }) {
     <BookModal isOpen={isOpen} onClose={onClose}>
       <div className={css.BookModalRead}>
         <svg width="54px" height="54px" className={css.BookModalReadSvg}>
-          <use href="../../../public/symbol-defs.svg#icon-thumb_up-24px-1"></use>
+          <use href="/symbol-defs.svg#icon-thumb_up-24px-1"></use>
         </svg>
         <p className={css.BookModalReadText}>
           Congratulations! Another book read.

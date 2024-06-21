@@ -87,7 +87,7 @@ export function Home() {
           height="12"
           onClick={contentOff}
         >
-          <use href="../../../public/symbol-defs.svg#icon-back"></use>
+          <use href="/symbol-defs.svg#icon-back"></use>
         </svg>
       )}
       {(showContent || !isMobile) && <BookForm />}
@@ -135,13 +135,13 @@ export function Home() {
               <h4 className={css.listTitle}>Step 1.</h4>
               <p className={css.listText}>
                 <svg className={css.icon} width="22" height="17">
-                  <use href="../../../public/symbol-defs.svg#icon-Flat" />
+                  <use href="/symbol-defs.svg#icon-Flat" />
                 </svg>
                 Create your own library
               </p>
               <div className={css.listSpanBoxFirst}>
                 <svg className={css.iconVector} width="10" height="12">
-                  <use href="../../../public/symbol-defs.svg#icon-Vector" />
+                  <use href="/symbol-defs.svg#icon-Vector" />
                 </svg>
                 <span className={css.listSpanFirst}>
                   Add there books which you are going to read.
@@ -152,13 +152,13 @@ export function Home() {
               <h4 className={css.listTitle}>Step 2.</h4>
               <p className={css.listText}>
                 <svg className={css.icon} width="15" height="17">
-                  <use href="../../../public/symbol-defs.svg#icon-flag" />
+                  <use href="/symbol-defs.svg#icon-flag" />
                 </svg>
                 Create your first training
               </p>
               <div className={css.listSpanBoxSecond}>
                 <svg className={css.iconVector} width="10" height="12">
-                  <use href="../../../public/symbol-defs.svg#icon-Vector" />
+                  <use href="/symbol-defs.svg#icon-Vector" />
                 </svg>
                 <span className={css.listSpanSecond}>
                   Set a goal, choose period, start training.{" "}

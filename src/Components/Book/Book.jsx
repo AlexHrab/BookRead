@@ -72,7 +72,7 @@ export function Book({ book, onClickDelete, title, onClickRating }) {
         <div className={trainingtitleAndSvg}>
           {!location || !RunDate ? (
             <svg className={bookSvg} width="22" height="17">
-              <use href="../../../public/symbol-defs.svg#icon-Flat"></use>
+              <use href="/symbol-defs.svg#icon-Flat"></use>
             </svg>
           ) : (
             <label className={css.checkboxContainer}>
@@ -131,7 +131,7 @@ export function Book({ book, onClickDelete, title, onClickRating }) {
               height="18"
               onClick={() => onClickDelete(book._id)}
             >
-              <use href="../../../public/symbol-defs.svg#icon-delete"></use>
+              <use href="/symbol-defs.svg#icon-delete"></use>
             </svg>
           )}
           {title === "Already read" && (

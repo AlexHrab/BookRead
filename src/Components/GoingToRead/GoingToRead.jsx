@@ -76,7 +76,7 @@ export function GoingToRead({
         {isMobile && !location && title === "Going to read" && (
           <Button type={"button"} onClick={onClick} className={"mobileForm"}>
             <svg className={css.icon} width="16" height="16">
-              <use href="../../../public/symbol-defs.svg#icon-cross"></use>
+              <use href="/symbol-defs.svg#icon-cross"></use>
             </svg>
           </Button>
         )}

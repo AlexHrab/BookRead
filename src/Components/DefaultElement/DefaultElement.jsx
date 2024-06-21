@@ -14,7 +14,7 @@ export function DefaultElement() {
     <div className={mainBox}>
       <div className={css.fild}>
         <svg className={css.icon} width="22" height="17">
-          <use href="../../../public/symbol-defs.svg#icon-Flat"></use>
+          <use href="/symbol-defs.svg#icon-Flat"></use>
         </svg>
         <span>...</span>
       </div>

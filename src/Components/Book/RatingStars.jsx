@@ -17,7 +17,7 @@ export function RatingStars({ bookRating }) {
           onChange={setRating}
         />
         <svg width="20" height="20" className={css.customCheckboxRatingStars}>
-          <use href="../../../public/symbol-defs.svg#icon-Star-6"></use>
+          <use href="/symbol-defs.svg#icon-Star-6"></use>
         </svg>
       </label>
     );

@@ -24,7 +24,7 @@ export function Calendar({ title, date, setDate }) {
         showIcon
         icon={
           <svg width="17" height="17" className={css.icon}>
-            <use href="../../../public/symbol-defs.svg#icon-calendar-7-1"></use>
+            <use href="/symbol-defs.svg#icon-calendar-7-1"></use>
           </svg>
         }
       />
