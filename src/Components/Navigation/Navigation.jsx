@@ -40,14 +40,14 @@ export function Navigation({ closeOn }) {
               <li>
                 <NavLink to="/training" className={navItemActive}>
                   <svg className={css.icon} width="20" height="17">
-                    <use href="public/symbol-defs.svg#icon-Flat" />
+                    <use href="/symbol-defs.svg#icon-Flat" />
                   </svg>
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/" className={navItemActive}>
                   <svg className={css.icon} width="20" height="17">
-                    <use href="public/symbol-defs.svg#icon-icon-home" />
+                    <use href="/symbol-defs.svg#icon-icon-home" />
                   </svg>
                 </NavLink>
               </li>
