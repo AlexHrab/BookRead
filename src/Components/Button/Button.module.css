@@ -146,6 +146,23 @@
   transform: translate(-26px, -50%);
 }
 
+.mobileFormNoBook {
+  width: 52px;
+  height: 52px;
+  background-color: #ff6b08;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* position: absolute; */
+  align-self: center;
+  /* top: 100%;
+  left: 50%;
+  transform: translate(-26px, -50%); */
+}
+
 .startTraning {
   width: 200px;
   height: 40px;

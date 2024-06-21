@@ -115,6 +115,19 @@ export function Home() {
               title={"Going to read"}
             />
           )}
+
+          {isMobile && goingToRead.length === 0 && (
+            <Button
+              type={"button"}
+              onClick={content}
+              className={"mobileFormNoBook"}
+            >
+              <svg className={css.iconNoBook} width="16" height="16">
+                <use href="/symbol-defs.svg#icon-cross"></use>
+              </svg>
+            </Button>
+          )}
+
           {goingToRead.length !== 0 &&
             currentlyReading.length === 0 &&
             finishedReading.length === 0 && (
