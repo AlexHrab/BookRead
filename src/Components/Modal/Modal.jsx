@@ -18,7 +18,7 @@ export function BookModal({ isOpen, onClose, children }) {
         preventScroll={true}
         shouldCloseOnOverlayClick={false}
       >
-        {!isMobile && <VscChromeClose className={css.icon} onClick={onClose} />}
+        <VscChromeClose className={css.icon} onClick={onClose} />
         {children}
       </Modal>
     </div>

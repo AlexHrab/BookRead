@@ -264,4 +264,12 @@
   .RatingModalBtn {
     width: 97px;
   }
+
+  .ResumeButton {
+  }
+
+  .resume {
+    display: flex;
+    width: 100%;
+  }
 }

@@ -69,6 +69,7 @@ export function Home() {
   }
 
   function contentOff() {
+    console.log("hello");
     setShowContent(false);
     setModalIsOpen(false);
     dispatch(greating(false));
@@ -77,6 +78,8 @@ export function Home() {
   function handleClick() {
     navigate("/training");
   }
+
+  // console.log(modalIsOpen);
 
   return (
     <div className={css.home}>
@@ -128,16 +131,14 @@ export function Home() {
             </Button>
           )}
 
-          {goingToRead.length !== 0 &&
-            currentlyReading.length === 0 &&
-            finishedReading.length === 0 && (
-              <Button
-                type={"button"}
-                onClick={handleClick}
-                title={"My training"}
-                className={"startTraning"}
-              />
-            )}
+          {goingToRead.length !== 0 && (
+            <Button
+              type={"button"}
+              onClick={handleClick}
+              title={"My training"}
+              className={"startTraning"}
+            />
+          )}
         </div>
       )}
       {isLoading && <Loader />}

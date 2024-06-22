@@ -21,19 +21,19 @@ const SignupSchema = yup.object().shape({
     .string()
     .email("Email is not valid!")
     .trim()
-    .min(2, "Too Short!")
+    .min(6, "Too Short!")
     .max(30, "Too Long!")
     .required("fild Required!"),
   password: yup
     .string()
     .trim()
-    .min(2, "Too Short!")
+    .min(6, "Too Short!")
     .max(20, "Too Long!")
     .required("fild Required!"),
   confirmPassword: yup
     .string()
     .trim()
-    .min(2, "Too Short!")
+    .min(6, "Too Short!")
     .max(20, "Too Long!")
     .required("fild Required!"),
 });
@@ -43,6 +43,7 @@ export function Register() {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const navigate = useNavigate();
   const Name = useSelector(selectUserName);
+  // console.log(Name);
 
   function Submit(values, actions) {
     if (values.password === values.confirmPassword) {
@@ -54,16 +55,16 @@ export function Register() {
         })
       )
         .unwrap()
-        .then((res) => navigate("/"))
-        .then((res) =>
+        .then((res) => {
+          actions.resetForm(); // Спочатку скидаємо форму
           toast.info(
-            `Congratulations ${Name}, you are successfully registered, please log in!`
-          )
-        )
+            `Congratulations ${values.name}, you are successfully registered, please log in!`
+          ); // Потім виводимо повідомлення
+          navigate("/"); // Перенаправляємо користувача
+        })
         .catch((error) => toast.error(error.message));
-      actions.resetForm();
     } else {
-      toast.info("password is not correct");
+      toast.info("Password is not correct");
     }
   }
 

@@ -130,6 +130,8 @@ export function Training() {
         new Date(formatDate(finishDate)).getTime()
       ) {
         if (startDate.getTime() > Date.now()) {
+          setGoalsCount({});
+          setYearCount({});
           dispatch(runDate(true));
 
           dispatch(
@@ -233,7 +235,7 @@ export function Training() {
         if (onlyRead >= pageSum) {
           dispatch(GoalsInterval(true));
 
-          setGoalsCount({});
+          // setGoalsCount({});
         }
       }, 1000);
       return () => clearInterval(intervalGoalsId);
@@ -264,7 +266,7 @@ export function Training() {
         }
         if (onlyRead >= pageSum) {
           dispatch(YearInterval(true));
-          setYearCount({});
+          // setYearCount({});
         }
       }, 1000);
       return () => clearInterval(intervalYearId);
@@ -277,6 +279,16 @@ export function Training() {
     }
   }, [dispatch, userRunDate]);
 
+  // useEffect(() => {
+  //   console.log("hello");
+  //   if (!userRunDate) {
+  //     setGoalsCount({});
+  //     setYearCount({});
+  //   }
+  // }, [userRunDate]);
+
+  // console.log(goalsCount);
+  // console.log(userRunDate);
   // ====================================================================================================
 
   function statisticsSubmit(values, actions) {

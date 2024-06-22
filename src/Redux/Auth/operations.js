@@ -10,8 +10,14 @@ export const register = createAsyncThunk(
       const data = await baseUrl.post("/auth/register", values);
       return data.data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -25,8 +31,14 @@ export const login = createAsyncThunk(
 
       return data.data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -36,8 +48,14 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     await baseUrl.post("/auth/logout");
     clearAccessToken();
   } catch (error) {
-    toast.error(error.message);
-    return thunkAPI.rejectWithValue(error.message);
+    if (error.response) {
+      const errorMessage = error.response.data.message;
+      toast.error(errorMessage);
+      return thunkAPI.rejectWithValue(errorMessage);
+    } else {
+      toast.error(error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 });
 
@@ -55,8 +73,14 @@ export const refresh = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
 
     return data.data;
   } catch (error) {
-    toast.error(error.message);
-    return thunkAPI.rejectWithValue(error.message);
+    if (error.response) {
+      const errorMessage = error.response.data.message;
+      toast.error(errorMessage);
+      return thunkAPI.rejectWithValue(errorMessage);
+    } else {
+      toast.error(error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 });
 
@@ -66,8 +90,14 @@ export const fetchLocation = createAsyncThunk(
     try {
       return value;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -78,8 +108,14 @@ export const greating = createAsyncThunk(
     try {
       return value;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -91,8 +127,14 @@ export const addBook = createAsyncThunk(
       const data = await baseUrl.post("/book", values);
       return data.data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -104,8 +146,14 @@ export const startTraining = createAsyncThunk(
       const data = await baseUrl.post("/planning", values);
       return data.data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -117,8 +165,14 @@ export const sendPages = createAsyncThunk(
       const data = await baseUrl.patch("/planning", values);
       return data.data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -136,8 +190,14 @@ export const getPlaning = createAsyncThunk(
       const data = await baseUrl.get("/planning");
       return data.data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -150,8 +210,14 @@ export const deleteBook = createAsyncThunk(
 
       return data.data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -170,8 +236,14 @@ export const getAllBooks = createAsyncThunk(
 
       return data.data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
@@ -187,8 +259,14 @@ export const bookReview = createAsyncThunk(
 
       return data.data;
     } catch (error) {
-      toast.error(error.message);
-      return thunkAPI.rejectWithValue(error.message);
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        toast.error(errorMessage);
+        return thunkAPI.rejectWithValue(errorMessage);
+      } else {
+        toast.error(error.message);
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );

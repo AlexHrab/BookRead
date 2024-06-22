@@ -9,7 +9,7 @@ import {
 import { useSelector } from "react-redux";
 import { Button } from "../Button/Button";
 import { ToastContainer, toast } from "react-toastify";
-
+import { useMediaQuery } from "react-responsive";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 
@@ -17,7 +17,7 @@ import { trainingBookList, trainingItemDelete } from "../../Redux/Auth/slice";
 
 export function SelectBook() {
   const dispatch = useDispatch();
-
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const [selectedBook, setSelectedBook] = useState();
 
   const books = useSelector(selectGoingToRead);
@@ -31,8 +31,11 @@ export function SelectBook() {
   ];
 
   function onClick() {
-    if (selectedBook?.value) {
+    if (selectedBook?.value && !Book) {
       dispatch(trainingBookList(selectedBook?.value));
+      if (isMobile) {
+        toast.info("Book successfully added to training list!");
+      }
     }
     if (!selectedBook?.value) {
       toast.info("Select a book first!");

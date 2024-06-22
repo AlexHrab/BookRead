@@ -68,6 +68,7 @@ const slice = createSlice({
         state.greating = true;
       })
       .addCase(logout.fulfilled, (state) => {
+        state.userData.name = "";
         state.sid = null;
         state.accessToken = null;
         state.refreshToken = null;

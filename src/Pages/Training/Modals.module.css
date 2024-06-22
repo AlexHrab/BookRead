@@ -41,3 +41,14 @@
 .BookModalReadText {
   width: 200px;
 }
+
+@media screen and (max-width: 767px) {
+  .BookModalTimeText {
+    width: 250px;
+  }
+
+  .btnBox {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
